@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "bigMoka";
+    src: url('/public/fonts/LibreBaskerville-Bold.ttf');
+}
+
+.LibreBaskerville-Bold {
+    font-family: "LibreBaskerville-Bold", "sans-serif";
+}
+
+@font-face {
+    font-family: "PlayfairDisplay-Bold";
+    src: url('/public/fonts/PlayfairDisplay-Bold.ttf');
+}
+
+.PlayfairDisplay-Bold {
+    font-family: "Playfair Display", serif;
+  
+}
+@font-face {
+    font-family:"Quicksand_Book" ;
+    src: url('/public/fonts/Quicksand_Book.otf');
+}
+
+.Quicksand_Book {
+    font-family: "Quicksand_Book", "serif";
+}
+
+.background {
+    background-image: url(/public/images/bg3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+.background2{
+    background-image: url(/public/images/bg4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
