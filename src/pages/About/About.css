@@ -35,6 +35,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    /* GPU-accelerated rotation */
+    will-change: transform;
 }
 
 .about__ring--1 {
@@ -217,59 +219,79 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+    .about__grid {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 900px) {
     .about__grid {
         grid-template-columns: 1fr;
-        gap: clamp(40px, 5vw, 60px);
         text-align: center;
     }
 
     .about__image-col {
         order: -1;
     }
-}
-
-@media (max-width: 768px) {
-    .about__grid {
-        gap: clamp(30px, 4vw, 50px);
-    }
-
-    .about__badge--1 {
-        right: 0;
-    }
-
-    .about__badge--2 {
-        left: 0;
-    }
 
     .about__actions {
         justify-content: center;
     }
+
+    .about__content {
+        align-items: center;
+    }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
     .about {
-        padding: clamp(20px, 3vw, 30px) clamp(0.75rem, 2vw, 1rem) !important;
+        padding: 30px 0 !important;
+    }
+
+    /* Stop expensive ring rotations on mobile */
+    .about__ring--1,
+    .about__ring--2,
+    .about__ring--3 {
+        animation: none !important;
+        will-change: auto !important;
     }
 
     .about__highlights {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .about__bio {
-        font-size: clamp(0.9rem, 1.3vw, 1rem);
+        width: 100%;
     }
 
-    .about__highlight-card {
+    .about__badge {
+        font-size: 11px;
+        padding: 6px 12px;
+        /* Remove backdrop-filter on mobile \u2014 expensive GPU operation */
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        /* Stop badge float animation */
+        animation: none !important;
+    }
+
+    .about__badge--1 {
+        right: -10px;
+    }
+
+    .about__badge--2 {
+        left: -10px;
+    }
+
+    /* No lift hover on mobile \u2014 prevents layout thrashing */
+    .about__highlight-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .about__actions {
         flex-direction: column;
-        text-align: center;
+        width: 100%;
     }
-}
 
-@media (max-width: 360px) {
-    .about {
-        padding: 16px 8px 24px !important;
+    .about__actions .btn {
+        width: 100% !important;
     }
 }

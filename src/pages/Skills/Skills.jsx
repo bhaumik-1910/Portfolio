@@ -1,19 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './Skills.css';
 
 const skillCategories = [
+    // ... items as they are
     {
         id: 'frontend',
         title: 'Frontend',
         icon: '🎨',
         color: '#3b82f6',
         skills: [
-            { name: 'HTML5', level: 98, icon: '📄' },
-            { name: 'CSS3 / Sass', level: 96, icon: '🎨' },
+            { name: 'HTML5', level: 90, icon: '📄' },
+            { name: 'CSS3 / Sass', level: 90, icon: '🎨' },
             { name: 'JavaScript', level: 95, icon: 'JS' },
             { name: 'React.js', level: 95, icon: '⚛️' },
             { name: 'Next.js', level: 90, icon: '▲' },
-            { name: 'Tailwind CSS', level: 92, icon: '�' },
+            { name: 'Tailwind CSS', level: 92, icon: '🌊' },
             { name: 'Bootstrap', level: 88, icon: 'B' },
             { name: 'MUI / Shadcn', level: 90, icon: '🎨' },
             { name: 'Motion UI', level: 85, icon: '✨' },
@@ -77,11 +78,10 @@ const techIcons = [
     { name: 'MongoDB', color: '#4db33d', symbol: '◉' },
 ];
 
-export default function Skills() {
-    const sectionRef = useRef(null);
+const marqueeIcons = [...techIcons, ...techIcons];
 
-    // Duplicate list for infinite marquee
-    const marqueeIcons = [...techIcons, ...techIcons];
+const Skills = () => {
+    const sectionRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -91,7 +91,6 @@ export default function Skills() {
                         entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
                             el.classList.add('visible');
                         });
-                        // Animate skill bars
                         entry.target.querySelectorAll('.skills__bar-fill').forEach((bar) => {
                             const level = bar.getAttribute('data-level');
                             setTimeout(() => {
@@ -111,7 +110,6 @@ export default function Skills() {
     return (
         <section className="section skills" id="skills" ref={sectionRef}>
             <div className="section-inner">
-                {/* Header */}
                 <div className="skills__header animate-on-scroll">
                     <span className="section-label">My Expertise</span>
                     <h2 className="section-title">
@@ -123,7 +121,6 @@ export default function Skills() {
                     </p>
                 </div>
 
-                {/* Tech Icons Row - Marquee */}
                 <div className="skills__marquee animate-on-scroll animate-delay-1">
                     <div className="skills__marquee-track">
                         {marqueeIcons.map((tech, idx) => (
@@ -137,14 +134,12 @@ export default function Skills() {
                     </div>
                 </div>
 
-                {/* Skill Categories Grid */}
                 <div className="skills__grid">
                     {skillCategories.map((cat, catIdx) => (
                         <div
                             key={cat.id}
                             className={`skills__category glass-card animate-on-scroll animate-delay-${catIdx + 1}`}
                         >
-                            {/* Category Header */}
                             <div className="skills__cat-header">
                                 <div
                                     className="skills__cat-icon"
@@ -157,7 +152,6 @@ export default function Skills() {
                                 </h3>
                             </div>
 
-                            {/* Skills List */}
                             <div className="skills__list">
                                 {cat.skills.map((skill) => (
                                     <div key={skill.name} className="skills__item">
@@ -189,4 +183,6 @@ export default function Skills() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Skills);

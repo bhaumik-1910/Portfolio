@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './Projects.css';
 
-const projects = [
+const projectsData = [
     {
         id: 1,
         title: 'NAAC Documentation Portal [LJKU]',
@@ -126,7 +126,7 @@ const projects = [
     },
 ];
 
-export default function Projects() {
+const Projects = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -150,7 +150,6 @@ export default function Projects() {
     return (
         <section className="section projects" id="projects" ref={sectionRef}>
             <div className="section-inner">
-                {/* Header */}
                 <div className="projects__header animate-on-scroll">
                     <span className="section-label">Selected Works</span>
                     <h2 className="section-title">
@@ -162,15 +161,13 @@ export default function Projects() {
                     </p>
                 </div>
 
-                {/* Projects Grid */}
                 <div className="projects__grid">
-                    {projects.map((project, idx) => (
+                    {projectsData.map((project, idx) => (
                         <div
                             key={project.id}
                             className={`project-card glass-card animate-on-scroll animate-delay-${(idx % 3) + 1}`}
                             id={`project-card-${project.id}`}
                         >
-                            {/* Project Image/Preview */}
                             <div
                                 className="project-card__preview"
                                 style={{ background: project.gradient }}
@@ -195,12 +192,10 @@ export default function Projects() {
                                 )}
                             </div>
 
-                            {/* Content */}
                             <div className="project-card__content">
                                 <h3 className="project-card__title">{project.title}</h3>
                                 <p className="project-card__desc">{project.description}</p>
 
-                                {/* Tags */}
                                 <div className="project-card__tags">
                                     {project.tags.map((tag) => (
                                         <span
@@ -217,7 +212,6 @@ export default function Projects() {
                                     ))}
                                 </div>
 
-                                {/* Links */}
                                 <div className="project-card__links">
                                     {project.liveUrl && project.liveUrl !== '#' ? (
                                         <>
@@ -261,7 +255,6 @@ export default function Projects() {
                     ))}
                 </div>
 
-                {/* View All Button */}
                 <div className="projects__footer animate-on-scroll">
                     <a
                         href="https://github.com/bhaumik-1910"
@@ -275,4 +268,6 @@ export default function Projects() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Projects);

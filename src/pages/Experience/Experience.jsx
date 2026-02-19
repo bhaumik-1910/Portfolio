@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './Experience.css';
 
-const experiences = [
+const experiencesData = [
     {
         id: 1,
         role: 'Full Stack Developer (React & MERN Stack)',
@@ -40,7 +40,7 @@ const experiences = [
 
 ];
 
-export default function Experience() {
+const Experience = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -64,7 +64,6 @@ export default function Experience() {
     return (
         <section className="section experience" id="experience" ref={sectionRef}>
             <div className="section-inner">
-                {/* Header */}
                 <div className="experience__header animate-on-scroll">
                     <span className="section-label">My Journey</span>
                     <h2 className="section-title">
@@ -75,18 +74,15 @@ export default function Experience() {
                     </p>
                 </div>
 
-                {/* Timeline */}
                 <div className="timeline">
-                    {/* Vertical line */}
                     <div className="timeline__line" />
 
-                    {experiences.map((exp, idx) => (
+                    {experiencesData.map((exp, idx) => (
                         <div
                             key={exp.id}
                             className={`timeline__item animate-on-scroll animate-delay-${idx + 1}`}
                             id={`experience-${exp.id}`}
                         >
-                            {/* Dot */}
                             <div
                                 className="timeline__dot"
                                 style={{ background: exp.color, boxShadow: `0 0 20px ${exp.color}60` }}
@@ -94,9 +90,7 @@ export default function Experience() {
                                 <span>{exp.icon}</span>
                             </div>
 
-                            {/* Card */}
                             <div className="timeline__card glass-card">
-                                {/* Header */}
                                 <div className="timeline__card-header">
                                     <div>
                                         <h3 className="timeline__role">{exp.role}</h3>
@@ -134,10 +128,8 @@ export default function Experience() {
                                     </div>
                                 </div>
 
-                                {/* Description */}
                                 <p className="timeline__desc">{exp.description}</p>
 
-                                {/* Achievements */}
                                 <ul className="timeline__achievements">
                                     {exp.achievements.map((ach, i) => (
                                         <li key={i} className="timeline__achievement">
@@ -156,4 +148,6 @@ export default function Experience() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Experience);

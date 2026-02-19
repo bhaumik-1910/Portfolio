@@ -377,132 +377,40 @@
 }
 
 /* Responsive Design System */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
 
-    /* Show menu icon and drawer on tablet and below */
+    /* Show menu icon and drawer on lg and below */
     .navbar__menu-icon {
         display: flex;
     }
 
     .navbar__links,
     .navbar__cta {
-        display: none;
+        display: none !important;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .navbar__inner {
-        height: 70px;
-        padding: 0 clamp(1rem, 3vw, 1.5rem);
-    }
-
-    .navbar--scrolled .navbar__inner {
-        height: 65px;
-    }
-
-    .navbar__logo-name {
-        font-size: clamp(1.1rem, 2.5vw, 1.25rem);
-    }
-
-    .navbar__drawer {
-        width: clamp(280px, 85vw, 380px);
+        height: clamp(60px, 10vw, 70px);
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 600px) {
     .navbar__inner {
-        height: 64px;
-        padding: 0 clamp(0.75rem, 2.5vw, 1.25rem);
-    }
-
-    .navbar--scrolled .navbar__inner {
-        height: 60px;
+        padding: 0 16px;
     }
 
     .navbar__logo-name {
-        font-size: 1rem;
-    }
-
-    .navbar__logo-bracket {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .navbar__drawer {
-        width: clamp(250px, 90vw, 350px);
-    }
-
-    .navbar__drawer-nav {
-        gap: 4px;
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar__inner {
-        height: 60px;
-        padding: 0 0.75rem;
-    }
-
-    .navbar__logo {
-        gap: 2px;
-    }
-
-    .navbar__logo-name {
-        font-size: 0.9rem;
-    }
-
-    .navbar__logo-bracket {
-        font-size: 0.9rem;
-    }
-
-    .navbar__menu-icon {
-        min-height: 40px;
-        min-width: 40px;
-        padding: 8px;
-    }
-
-    .navbar__drawer {
-        width: 100vw;
+        width: 100%;
         max-width: 320px;
     }
 
-    .navbar__drawer-header {
-        padding: 12px 16px;
-    }
-
     .navbar__drawer-nav {
-        padding: 12px 16px;
-        gap: 2px;
-    }
-
-    .navbar__drawer-footer {
-        padding: 12px 16px;
-    }
-}
-
-@media (max-width: 360px) {
-    .navbar__inner {
-        height: 56px;
-    }
-
-    .navbar__logo-name {
-        font-size: 0.85rem;
-    }
-
-    .navbar__menu-icon {
-        min-height: 36px;
-        min-width: 36px;
-    }
-
-    .navbar__drawer {
-        width: 100vw;
-    }
-
-    .navbar__drawer-title {
-        font-size: 16px;
-    }
-
-    .navbar__drawer-link {
-        padding: 10px 12px;
-        font-size: 14px;
+        gap: 8px;
     }
 }

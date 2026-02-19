@@ -28,6 +28,9 @@
     filter: blur(80px);
     pointer-events: none;
     z-index: 0;
+    /* GPU layer — keeps blur off the main thread */
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .hero__orb--1 {
@@ -272,22 +275,77 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: 1200px) {
+    .hero__title {
+        font-size: clamp(2.25rem, 5vw, 4rem);
+    }
+}
+
+@media (max-width: 900px) {
+    .hero {
+        padding: 80px 16px 40px;
+    }
+
+    .hero__content {
+        gap: 20px;
+    }
+
     .hero__stats {
-        gap: 24px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 60px 12px 30px;
+    }
+
+    /* Disable heavy blur orbs on mobile — biggest scroll jank culprit */
+    .hero__orb {
+        filter: none !important;
+        opacity: 0.06;
+        animation: none !important;
+        will-change: auto !important;
+    }
+
+    /* Disable canvas on mobile is done in JS, but also hide any canvas fallback */
+    .hero__grid {
+        display: none;
+    }
+
+    .hero__stats {
+        gap: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 0;
     }
 
     .hero__stat-value {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+    }
+
+    .hero__stat-label {
+        font-size: 10px;
     }
 
     .hero__actions {
         flex-direction: column;
         width: 100%;
+        gap: 12px;
     }
 
     .hero__btn {
-        width: 100%;
+        width: 100% !important;
         justify-content: center;
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__subtitle {
+        font-size: 0.95rem;
     }
 }

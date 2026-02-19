@@ -1,13 +1,22 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo, useCallback } from 'react';
 import './Hero.css';
 
-export default function Hero() {
+// Static data moved outside to prevent re-creation
+const TECH_STACK = ['React', 'Node.js', 'Next.js', 'MongoDB', 'JavaScript', 'AWS'];
+const HERO_STATS = [
+    { value: '1.5+', label: 'Years Experience' },
+    { value: '2+', label: 'Projects Completed' },
+    { value: '2', label: 'Happy Clients' },
+    { value: '100%', label: 'Client Satisfaction' },
+];
+
+const Hero = () => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false }); // Performance optimization
         let animationId;
         let particles = [];
 
@@ -18,8 +27,11 @@ export default function Hero() {
         resize();
         window.addEventListener('resize', resize);
 
+        // Adaptive particle count for mobile
+        const particleCount = window.innerWidth < 768 ? 40 : 80;
+
         // Create particles
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < particleCount; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -32,24 +44,28 @@ export default function Hero() {
         }
 
         const draw = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Faster clear
+            ctx.fillStyle = '#050b18';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw connections
-            particles.forEach((p, i) => {
-                particles.slice(i + 1).forEach((p2) => {
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.08 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
+            // Draw connections (Limit connections on mobile)
+            if (window.innerWidth >= 768) {
+                particles.forEach((p, i) => {
+                    particles.slice(i + 1).forEach((p2) => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = dx * dx + dy * dy; // Avoid sqrt for distance check
+                        if (dist < 14400) { // 120 * 120
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(59, 130, 246, ${0.08 * (1 - Math.sqrt(dist) / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
                 });
-            });
+            }
 
             // Draw particles
             particles.forEach((p) => {
@@ -77,32 +93,28 @@ export default function Hero() {
         };
     }, []);
 
-    const handleScroll = (href) => {
+    const handleScroll = useCallback((href) => {
         const el = document.querySelector(href);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-    };
+    }, []);
 
     return (
         <section className="hero" id="home">
-            {/* Particle Canvas */}
             <canvas ref={canvasRef} className="hero__canvas" aria-hidden="true" />
 
-            {/* Gradient Orbs */}
+            {/* Gradient Orbs with hardware acceleration */}
             <div className="hero__orb hero__orb--1" aria-hidden="true" />
             <div className="hero__orb hero__orb--2" aria-hidden="true" />
             <div className="hero__orb hero__orb--3" aria-hidden="true" />
 
-            {/* Grid overlay */}
             <div className="hero__grid" aria-hidden="true" />
 
             <div className="hero__content">
-                {/* Badge */}
                 <div className="hero__badge">
                     <span className="hero__badge-dot" />
                     <span>Available for Freelance & Full-time Roles</span>
                 </div>
 
-                {/* Main Heading */}
                 <h1 className="hero__title">
                     Building{' '}
                     <span className="gradient-text">Scalable</span>
@@ -112,7 +124,6 @@ export default function Hero() {
                     Web Applications
                 </h1>
 
-                {/* Typewriter subtitle */}
                 <div className="hero__subtitle-wrapper">
                     <p className="hero__subtitle">
                         Full Stack Developer crafting{' '}
@@ -122,14 +133,12 @@ export default function Hero() {
                     </p>
                 </div>
 
-                {/* Tech Stack Pills */}
                 <div className="hero__tech-pills">
-                    {['React', 'Node.js', 'Next.js', 'MongoDB', 'JavaScript', 'AWS'].map((tech) => (
+                    {TECH_STACK.map((tech) => (
                         <span key={tech} className="hero__pill">{tech}</span>
                     ))}
                 </div>
 
-                {/* CTA Buttons */}
                 <div className="hero__actions">
                     <button
                         className="btn btn-primary hero__btn"
@@ -156,14 +165,8 @@ export default function Hero() {
                     </button>
                 </div>
 
-                {/* Stats */}
                 <div className="hero__stats">
-                    {[
-                        { value: '1.5+', label: 'Years Experience' },
-                        { value: '2+', label: 'Projects Completed' },
-                        { value: '2', label: 'Happy Clients' },
-                        { value: '100%', label: 'Client Satisfaction' },
-                    ].map((stat) => (
+                    {HERO_STATS.map((stat) => (
                         <div key={stat.label} className="hero__stat">
                             <span className="hero__stat-value gradient-text">{stat.value}</span>
                             <span className="hero__stat-label">{stat.label}</span>
@@ -172,7 +175,6 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
             <div className="hero__scroll-indicator">
                 <div className="hero__scroll-mouse">
                     <div className="hero__scroll-wheel" />
@@ -181,4 +183,6 @@ export default function Hero() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Hero);

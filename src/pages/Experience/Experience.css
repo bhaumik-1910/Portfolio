@@ -74,7 +74,8 @@
 /* Card */
 .timeline__card {
     padding: 28px;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    will-change: transform;
 }
 
 .timeline__card:hover {
@@ -168,26 +169,52 @@
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+    .timeline {
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 600px) {
     .timeline__line {
-        left: 20px;
+        left: 18px;
     }
 
     .timeline__item {
-        padding-left: 60px;
+        padding-left: 50px;
     }
 
     .timeline__dot {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+
+    .timeline__card {
+        padding: 20px;
+        /* Disable hover slide on mobile */
+        will-change: auto;
+        transition: none;
+    }
+
+    .timeline__card:hover {
+        transform: none;
     }
 
     .timeline__card-header {
         flex-direction: column;
+        gap: 12px;
     }
 
     .timeline__meta {
         align-items: flex-start;
+    }
+
+    .timeline__role {
+        font-size: 1.05rem;
+    }
+
+    .timeline__desc {
+        font-size: 13px;
     }
 }

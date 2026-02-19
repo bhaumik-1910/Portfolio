@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './About.css';
 
 const highlights = [
@@ -8,7 +8,7 @@ const highlights = [
     { icon: '🎨', label: 'UI/UX', desc: 'Beautiful interfaces' },
 ];
 
-export default function About() {
+const About = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -33,15 +33,13 @@ export default function About() {
         <section className="section about" id="about" ref={sectionRef}>
             <div className="section-inner">
                 <div className="about__grid">
-                    {/* Left - Image */}
+                    {/* Left - Image (Directly embedded SVGs for performance) */}
                     <div className="about__image-col animate-on-scroll">
                         <div className="about__image-wrapper">
-                            {/* Decorative rings */}
                             <div className="about__ring about__ring--1" />
                             <div className="about__ring about__ring--2" />
                             <div className="about__ring about__ring--3" />
 
-                            {/* Profile placeholder */}
                             <div className="about__avatar">
                                 <div className="about__avatar-inner">
                                     <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="about__avatar-svg">
@@ -62,7 +60,6 @@ export default function About() {
                                 </div>
                             </div>
 
-                            {/* Floating badges */}
                             <div className="about__badge about__badge--1">
                                 <span>⚡</span>
                                 <span>1.5+ Years Exp</span>
@@ -133,4 +130,6 @@ export default function About() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(About);

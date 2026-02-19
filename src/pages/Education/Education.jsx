@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './Education.css';
 
 const educationData = [
@@ -73,7 +73,7 @@ const educationData = [
     }
 ];
 
-export default function Education() {
+const Education = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -172,4 +172,6 @@ export default function Education() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Education);

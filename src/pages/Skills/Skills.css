@@ -33,6 +33,8 @@
     width: fit-content;
     gap: 16px;
     animation: marquee 40s linear infinite;
+    /* GPU compositor layer prevents marquee from blocking scroll */
+    will-change: transform;
 }
 
 .skills__marquee-track:hover {
@@ -180,19 +182,43 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .skills__grid {
-        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
-@media (max-width: 480px) {
-    .skills__tech-row {
-        gap: 8px;
+@media (max-width: 900px) {
+    .skills__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills__header {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .skills__category {
+        padding: 20px;
     }
 
     .skills__tech-icon {
         padding: 12px 14px;
-        min-width: 70px;
+        min-width: 80px;
+    }
+
+    .skills__tech-symbol {
+        font-size: 1.3rem;
+    }
+
+    /* Disable hover lift on skill tech icons to prevent jank */
+    .skills__tech-icon:hover {
+        transform: none !important;
+    }
+
+    /* Stop marquee hover-pause — no hover intent on touch devices */
+    .skills__marquee-track:hover {
+        animation-play-state: running;
     }
 }

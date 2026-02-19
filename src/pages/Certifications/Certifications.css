@@ -31,9 +31,12 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     height: 100%;
+    will-change: transform;
 }
 
 .certification__card:hover {
@@ -136,25 +139,50 @@
     pointer-events: none;
 }
 
-/* Animations are reused from global system but defined if needed */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-}
+/* Note: animate-on-scroll styles are defined globally in index.css */
 
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .certifications__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .certifications {
+        padding: 30px 0 !important;
+    }
+
     .certifications__grid {
         grid-template-columns: 1fr;
     }
 
     .certification__card {
         padding: 24px;
+        /* Remove hover animations on mobile */
+        will-change: auto;
+        transition: none;
+    }
+
+    .certification__card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Disable expensive 3D rotateY on mobile icons */
+    .certification__card:hover .certification__icon {
+        transform: none;
+    }
+
+    .certification__title {
+        font-size: 1.15rem;
+    }
+
+    .certification__icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
 }

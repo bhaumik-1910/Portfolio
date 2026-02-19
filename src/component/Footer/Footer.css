@@ -232,22 +232,22 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1536px) {
     .footer__top {
         grid-template-columns: 2fr repeat(3, 1fr);
-        gap: clamp(30px, 4vw, 40px);
     }
 }
 
-@media (max-width: 1024px) {
-    .footer {
-        padding: clamp(50px, 6vw, 100px) clamp(1rem, 2.5vw, 1.5rem) clamp(40px, 5vw, 50px);
+@media (max-width: 1200px) {
+    .footer__top {
+        grid-template-columns: 2fr 1fr 1fr;
     }
+}
 
+@media (max-width: 900px) {
     .footer__top {
         grid-template-columns: 1fr 1fr;
-        gap: clamp(40px, 5vw, 60px);
-        margin-bottom: clamp(50px, 6vw, 80px);
+        gap: 40px;
     }
 
     .footer__brand {
@@ -257,151 +257,46 @@
     }
 
     .footer__tagline {
-        max-width: 500px;
+        max-width: 100%;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .footer {
-        padding: clamp(40px, 5vw, 80px) clamp(0.75rem, 2vw, 1rem) clamp(30px, 4vw, 40px);
-    }
-
-    .footer__top {
-        gap: clamp(30px, 4vw, 50px);
-    }
-}
-
-@media (max-width: 640px) {
-    .footer {
-        padding: clamp(35px, 4vw, 60px) clamp(0.75rem, 2vw, 1rem) clamp(25px, 3vw, 35px);
+        padding: 40px 0 !important;
     }
 
     .footer__top {
         grid-template-columns: 1fr;
-        gap: clamp(30px, 4vw, 48px);
         text-align: center;
-        margin-bottom: clamp(40px, 5vw, 64px);
+        gap: 32px;
     }
 
     .footer__brand {
         grid-column: span 1;
-        gap: clamp(14px, 2vw, 20px);
-        align-items: center;
-    }
-
-    .footer__logo {
-        justify-content: center;
-        font-size: clamp(1.3rem, 3vw, 1.75rem);
-    }
-
-    .footer__tagline {
-        margin: 0 auto;
-        font-size: clamp(13px, 1.3vw, 15px);
-        line-height: 1.6;
-        max-width: 300px;
-        opacity: 0.9;
     }
 
     .footer__socials {
         justify-content: center;
-        gap: clamp(12px, 2vw, 16px);
-    }
-
-    .footer__social-link {
-        width: clamp(40px, 8vw, 48px);
-        height: clamp(40px, 8vw, 48px);
-    }
-
-    .footer__nav-group {
-        gap: clamp(18px, 3vw, 24px);
-        padding: 0 clamp(10px, 2vw, 16px);
-    }
-
-    .footer__heading {
-        font-size: clamp(13px, 1.5vw, 16px);
-        padding-bottom: clamp(12px, 2vw, 16px);
     }
 
     .footer__heading::after {
         left: 50%;
         transform: translateX(-50%);
-        width: clamp(30px, 5vw, 40px);
-    }
-
-    .footer__links {
-        gap: clamp(12px, 2vw, 16px);
     }
 
     .footer__nav-link,
     .footer__nav-text {
         justify-content: center;
-        font-size: clamp(13px, 1.4vw, 16px);
-    }
-
-    .footer__nav-link:hover {
-        transform: none;
-        color: var(--accent-blue-light);
-    }
-
-    .footer__contact-text {
-        font-size: clamp(13px, 1.3vw, 15px);
-        max-width: 250px;
-        margin: 0 auto;
-    }
-
-    .footer__cta-link {
-        justify-content: center;
-        width: fit-content;
-        margin: clamp(6px, 1vw, 8px) auto 0;
-        padding: clamp(10px, 1.5vw, 12px) clamp(20px, 3vw, 24px);
-        background: rgba(59, 130, 246, 0.05);
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        border-radius: var(--radius-md);
-        font-size: clamp(13px, 1.4vw, 16px);
     }
 
     .footer__bottom {
-        flex-direction: column-reverse;
-        gap: clamp(24px, 4vw, 32px);
+        flex-direction: column;
+        gap: 20px;
         text-align: center;
-        padding-top: clamp(24px, 3vw, 32px);
     }
 
     .footer__legal {
         justify-content: center;
-        gap: clamp(12px, 2vw, 16px);
-        flex-wrap: wrap;
-    }
-
-    .footer__legal-link {
-        font-size: clamp(12px, 1.2vw, 14px);
-    }
-
-    .footer__scroll-top {
-        width: clamp(44px, 9vw, 54px);
-        height: clamp(44px, 9vw, 54px);
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 100;
-        background: var(--bg-secondary);
-        border-color: rgba(59, 130, 246, 0.3);
-        font-size: clamp(1rem, 1.8vw, 1.3rem);
-    }
-}
-
-@media (max-width: 480px) {
-    .footer {
-        padding: 30px 0.75rem 20px;
-    }
-
-    .footer__logo {
-        font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    }
-}
-
-@media (max-width: 360px) {
-    .footer {
-        padding: 20px 0.5rem 16px;
     }
 }

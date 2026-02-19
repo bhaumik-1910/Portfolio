@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import './Certifications.css';
 
 const certificationsData = [
@@ -31,7 +31,7 @@ const certificationsData = [
     },
 ];
 
-export default function Certifications() {
+const Certifications = () => {
     const sectionRef = useRef(null);
 
     useEffect(() => {
@@ -120,4 +120,6 @@ export default function Certifications() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Certifications);

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback, memo } from 'react';
 import './Contact.css';
 
-export default function Contact() {
+const Contact = () => {
     const sectionRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -30,11 +30,11 @@ export default function Contact() {
         return () => observer.disconnect();
     }, []);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const handleChange = useCallback((e) => {
+        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         setStatus('sending');
         setErrorMessage('');
@@ -63,7 +63,7 @@ export default function Contact() {
             setStatus('error');
             setErrorMessage('Could not connect to the server. Please ensure the backend is running.');
         }
-    };
+    }, [formData]);
 
     return (
         <section className="section contact" id="contact" ref={sectionRef}>
@@ -240,4 +240,6 @@ export default function Contact() {
             </div>
         </section>
     );
-}
+};
+
+export default memo(Contact);

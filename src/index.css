@@ -72,8 +72,13 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Enables native momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Let the browser handle vertical pan natively */
+  touch-action: pan-y;
 }
 
 /* ============================================
@@ -127,6 +132,7 @@ a {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -156,14 +162,19 @@ img {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-lg);
-  transition: var(--transition-smooth);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Hardware acceleration - promotes to own compositor layer */
+  transform: translateZ(0);
 }
 
 .glass-card:hover {
   background: var(--bg-glass-hover);
   border-color: var(--border-accent);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
+  transform: translateY(-4px) translateZ(0);
 }
 
 /* ============================================
@@ -171,14 +182,17 @@ img {
    ============================================ */
 .section {
   padding: 80px 0;
-  padding: 80px 0;
   position: relative;
+  /* Skip rendering sections off-screen for faster scroll */
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
 }
 
 .section-inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 5vw, 40px);
+  width: 100%;
 }
 
 .section-label {
@@ -202,17 +216,19 @@ img {
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 5vw, 3rem);
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 16px;
 }
 
 .section-subtitle {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   color: var(--text-secondary);
-  max-width: 600px;
+  max-width: 700px;
   line-height: 1.7;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ============================================
@@ -427,8 +443,8 @@ img {
    ============================================ */
 .animate-on-scroll {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .animate-on-scroll.visible {
@@ -475,18 +491,75 @@ img {
 /* ============================================
    RESPONSIVE UTILITIES
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+  .section {
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 900px) {
   .section {
     padding: 60px 0;
   }
 
-  .section-inner {
-    padding: 0 16px;
+  .section-title {
+    text-align: center;
+  }
+
+  .section-label {
+    justify-content: center;
+    width: 100%;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .section {
     padding: 40px 0;
+  }
+
+  .btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .section-subtitle {
+    text-align: center;
+  }
+
+  /* Disable heavy GPU effects on mobile to prevent scroll lag */
+  .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 18, 40, 0.95);
+    /* Remove box-shadow on mobile (causes paint storms) */
+    box-shadow: none !important;
+    /* Remove will-change on mobile — wastes memory when static */
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .glass-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Reduce animation motion for lower-end devices */
+  .animate-on-scroll {
+    transition-duration: 0.4s;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY: Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
