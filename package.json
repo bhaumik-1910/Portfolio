@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "npm start --prefix backend",
+    "server:dev": "npm run dev --prefix backend",
+    "full": "npm run dev & npm run server:dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -23,7 +26,10 @@
     "embla-carousel-react": "^7.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-intersection-observer": "^10.0.2",
+    "react-scroll": "^1.9.3",
+    "react-type-animation": "^3.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -37,7 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "postcss": "^8.4.49",
-    "react-router-dom": "^7.1.1",
+    "react-router-dom": "^7.13.0",
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.5"
   }

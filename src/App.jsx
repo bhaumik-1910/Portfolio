@@ -1,33 +1,78 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
-import About from './pages/about'
-import Home from './pages/home'
-import Skill from './pages/skill'
-import Education from './pages/education'
-import Work from './pages/work'
-import Contact from './pages/contact'
-import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core'
-import Sidebar from './component/Sidebar'
-import Web from './component/work/web'
-import { pages } from './utils/data.constants'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Navbar from './component/Navbar/Navbar';
+import Footer from './component/Footer/Footer';
+import Hero from './pages/Hero/Hero';
+import About from './pages/About/About';
+import Skills from './pages/Skills/Skills';
+import Projects from './pages/Projects/Projects';
+import Experience from './pages/Experience/Experience';
+import Testimonials from './pages/Testimonials/Testimonials';
+import Education from './pages/Education/Education';
+import Certifications from './pages/Certifications/Certifications';
+import Contact from './pages/Contact/Contact';
 
-const App = () => (
-  <MantineProvider>
-    <BrowserRouter>
-      <Sidebar pages={pages}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />}></Route>
-          <Route path='/skill' element={<Skill />}></Route>
-          <Route path='/education' element={<Education />}></Route>
-          <Route path="/work" element={<Work />} />
-          <Route path="/web" element={<Web />} />
-          <Route path='/contact' element={<Contact />}></Route>
-        </Routes>
-      </Sidebar>
-    </BrowserRouter>
-  </MantineProvider>
-)
+function App() {
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isPointer, setIsPointer] = useState(false);
 
-export default App
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+      const target = e.target;
+      setIsPointer(
+        window.getComputedStyle(target).cursor === 'pointer' ||
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON'
+      );
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <div className="app">
+      {/* Noise Overlay */}
+      <div className="noise-overlay" />
+
+      {/* Background blobs */}
+      <div className="app-bg" />
+
+      {/* Custom Cursor */}
+      <div
+        className={`custom-cursor ${isPointer ? 'custom-cursor--pointer' : ''}`}
+        style={{
+          transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`
+        }}
+      />
+      <div
+        className="custom-cursor-dot"
+        style={{
+          transform: `translate(${cursorPos.x}px, ${cursorPos.y}px)`
+        }}
+      />
+
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Sections */}
+      <main className="main-content">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Education />
+        <Certifications />
+        <Testimonials />
+        <Contact />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;

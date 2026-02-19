@@ -1,0 +1,273 @@
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+.about {
+    background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.03) 50%, transparent);
+    margin-top: -20px;
+    padding-top: 40px !important;
+}
+
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    /* gap: 60px; */
+    align-items: center;
+}
+
+/* Image Column */
+.about__image-col {
+    display: flex;
+    justify-content: center;
+}
+
+.about__image-wrapper {
+    position: relative;
+    width: 340px;
+    height: 340px;
+}
+
+/* Decorative Rings */
+.about__ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.about__ring--1 {
+    width: 340px;
+    height: 340px;
+    border-color: rgba(59, 130, 246, 0.15);
+    animation: spin-ring 20s linear infinite;
+}
+
+.about__ring--1::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--accent-blue);
+}
+
+.about__ring--2 {
+    width: 280px;
+    height: 280px;
+    border-color: rgba(139, 92, 246, 0.12);
+    animation: counter-spin 15s linear infinite;
+}
+
+.about__ring--2::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-purple);
+    border-radius: 50%;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px var(--accent-purple);
+}
+
+.about__ring--3 {
+    width: 220px;
+    height: 220px;
+    border-color: rgba(6, 182, 212, 0.1);
+    animation: spin-ring 25s linear infinite reverse;
+}
+
+/* Avatar */
+.about__avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    overflow: hidden;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.about__avatar-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, #0a1628, #0d0a2e);
+}
+
+.about__avatar-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+}
+
+.about__avatar-initials {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+/* Floating Badges */
+.about__badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(10, 18, 40, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.about__badge--1 {
+    top: 20px;
+    right: -20px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.about__badge--2 {
+    bottom: 20px;
+    left: -20px;
+    animation: float 5s ease-in-out infinite 1s;
+}
+
+/* Content */
+.about__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about__bio {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.about__bio strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Highlights */
+.about__highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.about__highlight-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    cursor: default;
+}
+
+.about__highlight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.about__highlight-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.about__highlight-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Actions */
+.about__actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about__grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        text-align: center;
+    }
+
+    .about__image-col {
+        order: -1;
+    }
+
+    .about__image-wrapper {
+        width: 280px;
+        height: 280px;
+    }
+
+    .about__ring--1 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .about__ring--2 {
+        width: 230px;
+        height: 230px;
+    }
+
+    .about__ring--3 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .about__avatar {
+        width: 150px;
+        height: 150px;
+    }
+
+    .about__badge--1 {
+        right: 0;
+    }
+
+    .about__badge--2 {
+        left: 0;
+    }
+
+    .about__actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .about__highlights {
+        grid-template-columns: 1fr;
+    }
+}

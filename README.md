@@ -85,7 +85,7 @@ This project is licensed under the **MIT License**.
 
 ## 👤 Author
 
-**Bhaumik Patel**  
+**Bhaumik Kothiya**  
 GitHub: [@bhaumik-1910](https://github.com/bhaumik-1910)
 
 ---

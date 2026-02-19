@@ -1,0 +1,203 @@
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+.contact {
+    background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03) 50%, transparent);
+    margin-top: -50px;
+    padding-top: 40px !important;
+}
+
+.contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* Info Column */
+.contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.contact__desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 16px;
+}
+
+.contact__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-blue);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.contact__item:hover .contact__icon {
+    background: var(--accent-blue);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.contact__label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+
+.contact__link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact__link:hover {
+    color: var(--accent-blue-light);
+}
+
+/* Socials */
+.contact__socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.social-btn {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-btn:hover {
+    color: var(--text-primary);
+    transform: translateY(-4px) rotate(8deg);
+    border-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* Form Column */
+.contact__form {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-left: 4px;
+}
+
+.form-input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+.form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact__submit {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+    gap: 12px;
+}
+
+/* Status */
+.form-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    margin-top: 8px;
+    animation: fadeInUp 0.4s ease;
+}
+
+.form-status.success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #34d399;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact__grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .contact__info {
+        text-align: center;
+        align-items: center;
+    }
+
+    .contact__details {
+        align-items: center;
+    }
+
+    .contact__socials {
+        justify-content: center;
+    }
+
+    .contact__form {
+        padding: 30px 20px;
+    }
+}
