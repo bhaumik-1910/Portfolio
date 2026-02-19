@@ -15,7 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function Navbar() {
     }, []);
 
     const handleNavClick = (href) => {
-        setMenuOpen(false);
+        setDrawerOpen(false);
         const target = document.querySelector(href);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
@@ -51,21 +51,21 @@ export default function Navbar() {
                 {/* Logo */}
                 <a
                     href="#home"
-                    className="navbar__logo"
+                    className="navbar__logo flex-shrink-0"
                     onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
                 >
                     <span className="navbar__logo-bracket">&lt;</span>
-                    <span className="navbar__logo-name">Bhaumik</span>
+                    <span className="navbar__logo-name text-base md:text-lg">Bhaumik</span>
                     <span className="navbar__logo-bracket">/&gt;</span>
                 </a>
 
                 {/* Desktop Nav */}
-                <nav className="navbar__links" aria-label="Main navigation">
+                <nav className="navbar__links hidden lg:flex" aria-label="Main navigation">
                     {navLinks.map((link) => (
                         <a
                             key={link.label}
                             href={link.href}
-                            className={`navbar__link ${activeSection === link.href.replace('#', '') ? 'navbar__link--active' : ''}`}
+                            className={`navbar__link text-sm lg:text-base ${activeSection === link.href.replace('#', '') ? 'navbar__link--active' : ''}`}
                             onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                         >
                             {link.label}
@@ -73,21 +73,22 @@ export default function Navbar() {
                     ))}
                 </nav>
 
-                {/* CTA Button */}
+                {/* CTA Button - Desktop Only */}
                 <a
                     href="#contact"
-                    className="navbar__cta btn btn-primary"
+                    className="navbar__cta hidden lg:block btn btn-primary text-sm"
                     onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
                 >
                     Hire Me
                 </a>
 
-                {/* Hamburger */}
+                {/* Menu Icon Button - Mobile/Tablet */}
                 <button
-                    className={`navbar__hamburger ${menuOpen ? 'navbar__hamburger--open' : ''}`}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label="Toggle menu"
-                    aria-expanded={menuOpen}
+                    className={`navbar__menu-icon ${drawerOpen ? 'navbar__menu-icon--active' : ''}`}
+                    onClick={() => setDrawerOpen(!drawerOpen)}
+                    aria-label="Toggle drawer menu"
+                    aria-expanded={drawerOpen}
+                    aria-controls="navbar-drawer"
                 >
                     <span></span>
                     <span></span>
@@ -95,26 +96,60 @@ export default function Navbar() {
                 </button>
             </div>
 
-            {/* Mobile Menu */}
-            <div className={`navbar__mobile-menu ${menuOpen ? 'navbar__mobile-menu--open' : ''}`}>
-                {navLinks.map((link) => (
-                    <a
-                        key={link.label}
-                        href={link.href}
-                        className={`navbar__mobile-link ${activeSection === link.href.replace('#', '') ? 'navbar__mobile-link--active' : ''}`}
-                        onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+            {/* Drawer Overlay */}
+            {drawerOpen && (
+                <div
+                    className="navbar__drawer-overlay"
+                    onClick={() => setDrawerOpen(false)}
+                    aria-hidden="true"
+                />
+            )}
+
+            {/* Drawer Menu */}
+            <div
+                id="navbar-drawer"
+                className={`navbar__drawer ${drawerOpen ? 'navbar__drawer--open' : ''}`}
+            >
+                {/* Drawer Header */}
+                <div className="navbar__drawer-header">
+                    <h2 className="navbar__drawer-title">Navigation</h2>
+                    <button
+                        className="navbar__drawer-close"
+                        onClick={() => setDrawerOpen(false)}
+                        aria-label="Close drawer"
                     >
-                        {link.label}
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                {/* Drawer Links */}
+                <nav className="navbar__drawer-nav" aria-label="Drawer navigation">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+                            className={`navbar__drawer-link ${activeSection === link.href.replace('#', '') ? 'navbar__drawer-link--active' : ''}`}
+                            onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                        >
+                            <span className="navbar__drawer-link-label">{link.label}</span>
+                            {activeSection === link.href.replace('#', '') && (
+                                <span className="navbar__drawer-link-indicator"></span>
+                            )}
+                        </a>
+                    ))}
+                </nav>
+
+                {/* Drawer Footer */}
+                <div className="navbar__drawer-footer">
+                    <a
+                        href="#contact"
+                        className="btn btn-primary w-full text-center"
+                        onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+                    >
+                        Hire Me
                     </a>
-                ))}
-                <a
-                    href="#contact"
-                    className="btn btn-primary"
-                    style={{ marginTop: '16px', justifyContent: 'center' }}
-                    onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-                >
-                    Hire Me
-                </a>
+                </div>
             </div>
         </header>
     );
