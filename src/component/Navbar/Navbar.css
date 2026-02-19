@@ -136,7 +136,8 @@
     border-radius: var(--radius-sm);
     transition: background 0.2s ease;
     flex-shrink: 0;
-    /* Ensure button doesn't shrink */
+    margin-right: 4px;
+    /* Move slightly left from the edge */
 }
 
 .navbar__hamburger:hover {
@@ -183,25 +184,31 @@
 }
 
 .navbar__mobile-menu--open {
-    max-height: 500px;
-    padding: 16px 24px 24px;
+    max-height: 80vh;
+    /* Dynamic height based on viewport */
+    padding: 16px 24px 32px;
     opacity: 1;
     visibility: visible;
+    overflow-y: auto;
+    /* Allow scroll if content is too long */
 }
 
 .navbar__mobile-link {
-    padding: 14px 0;
+    padding: 16px 0;
     font-size: 16px;
     font-weight: 500;
     color: var(--text-secondary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    display: block;
 }
 
 .navbar__mobile-link:hover,
 .navbar__mobile-link--active {
     color: var(--accent-blue-light);
+    padding-left: 8px;
+    /* Subtle slide effect on mobile */
 }
 
 /* Responsive */
@@ -231,6 +238,7 @@
 
     .navbar__inner {
         padding: 0 16px;
+        /* Optimized edge spacing for small phones */
     }
 
     .navbar__logo-name {
@@ -241,11 +249,14 @@
         width: 34px;
         height: 34px;
     }
+
+    .navbar__hamburger {
+        margin-right: 2px;
+    }
 }
 
 @media (max-width: 360px) {
     .navbar__logo-name {
-        display: none;
-        /* Hide name on extremely small screens to save space */
+        font-size: 1.1rem;
     }
 }
