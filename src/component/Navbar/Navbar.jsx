@@ -9,7 +9,7 @@ const navLinks = [
     { label: 'Experience', href: '#experience' },
     { label: 'Education', href: '#education' },
     { label: 'Awards', href: '#certifications' },
-    { label: 'Testimonials', href: '#testimonials' },
+    // { label: 'Testimonials', href: '#testimonials' },
     { label: 'Contact', href: '#contact' },
 ];
 

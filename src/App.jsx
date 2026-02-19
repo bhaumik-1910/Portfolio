@@ -7,7 +7,7 @@ import About from './pages/About/About';
 import Skills from './pages/Skills/Skills';
 import Projects from './pages/Projects/Projects';
 import Experience from './pages/Experience/Experience';
-import Testimonials from './pages/Testimonials/Testimonials';
+// import Testimonials from './pages/Testimonials/Testimonials';
 import Education from './pages/Education/Education';
 import Certifications from './pages/Certifications/Certifications';
 import Contact from './pages/Contact/Contact';
@@ -65,7 +65,7 @@ function App() {
         <Experience />
         <Education />
         <Certifications />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Contact />
       </main>
 
