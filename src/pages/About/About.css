@@ -4,14 +4,14 @@
 
 .about {
     background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.03) 50%, transparent);
-    margin-top: -20px;
-    padding-top: 40px !important;
+    margin-top: clamp(-30px, -5vw, -50px);
+    padding: clamp(30px, 5vw, 40px) clamp(1rem, 3vw, 2rem) !important;
 }
 
 .about__grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    /* gap: 60px; */
+    gap: clamp(30px, 5vw, 60px);
     align-items: center;
 }
 
@@ -23,8 +23,8 @@
 
 .about__image-wrapper {
     position: relative;
-    width: 340px;
-    height: 340px;
+    width: clamp(280px, 40vw, 340px);
+    height: clamp(280px, 40vw, 340px);
 }
 
 /* Decorative Rings */
@@ -38,8 +38,8 @@
 }
 
 .about__ring--1 {
-    width: 340px;
-    height: 340px;
+    width: clamp(280px, 40vw, 340px);
+    height: clamp(280px, 40vw, 340px);
     border-color: rgba(59, 130, 246, 0.15);
     animation: spin-ring 20s linear infinite;
 }
@@ -47,19 +47,19 @@
 .about__ring--1::after {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: clamp(7px, 2vw, 10px);
+    height: clamp(7px, 2vw, 10px);
     background: var(--accent-blue);
     border-radius: 50%;
-    top: -5px;
+    top: clamp(-5px, -1.5vw, -5px);
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 10px var(--accent-blue);
 }
 
 .about__ring--2 {
-    width: 280px;
-    height: 280px;
+    width: clamp(230px, 33vw, 280px);
+    height: clamp(230px, 33vw, 280px);
     border-color: rgba(139, 92, 246, 0.12);
     animation: counter-spin 15s linear infinite;
 }
@@ -67,19 +67,19 @@
 .about__ring--2::after {
     content: '';
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: clamp(6px, 1.5vw, 8px);
+    height: clamp(6px, 1.5vw, 8px);
     background: var(--accent-purple);
     border-radius: 50%;
-    bottom: -4px;
+    bottom: clamp(-3px, -1vw, -4px);
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0 8px var(--accent-purple);
 }
 
 .about__ring--3 {
-    width: 220px;
-    height: 220px;
+    width: clamp(180px, 26vw, 220px);
+    height: clamp(180px, 26vw, 220px);
     border-color: rgba(6, 182, 212, 0.1);
     animation: spin-ring 25s linear infinite reverse;
 }
@@ -90,11 +90,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
+    width: clamp(140px, 20vw, 180px);
+    height: clamp(140px, 20vw, 180px);
     border-radius: 50%;
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-    border: 2px solid rgba(59, 130, 246, 0.3);
+    border: clamp(1px, 0.3vw, 2px) solid rgba(59, 130, 246, 0.3);
     overflow: hidden;
     animation: pulse-glow 3s ease-in-out infinite;
 }
@@ -119,7 +119,7 @@
 .about__avatar-initials {
     position: relative;
     z-index: 1;
-    font-size: 3rem;
+    font-size: clamp(1.8rem, 5vw, 3rem);
     font-weight: 800;
     background: var(--gradient-text);
     -webkit-background-clip: text;
@@ -133,12 +133,12 @@
     position: absolute;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: clamp(6px, 1vw, 8px);
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
     background: rgba(10, 18, 40, 0.9);
     border: 1px solid rgba(59, 130, 246, 0.25);
     border-radius: var(--radius-md);
-    font-size: 13px;
+    font-size: clamp(11px, 1.2vw, 13px);
     font-weight: 600;
     color: var(--text-primary);
     backdrop-filter: blur(10px);
@@ -147,14 +147,14 @@
 }
 
 .about__badge--1 {
-    top: 20px;
-    right: -20px;
+    top: clamp(10px, 2vw, 20px);
+    right: clamp(-20px, -5vw, -20px);
     animation: float 4s ease-in-out infinite;
 }
 
 .about__badge--2 {
-    bottom: 20px;
-    left: -20px;
+    bottom: clamp(10px, 2vw, 20px);
+    left: clamp(-20px, -5vw, -20px);
     animation: float 5s ease-in-out infinite 1s;
 }
 
@@ -162,11 +162,11 @@
 .about__content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: clamp(16px, 3vw, 20px);
 }
 
 .about__bio {
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
     color: var(--text-secondary);
     line-height: 1.8;
     text-align: justify;
@@ -181,30 +181,30 @@
 .about__highlights {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: clamp(10px, 2vw, 12px);
 }
 
 .about__highlight-card {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 16px;
+    gap: clamp(10px, 2vw, 12px);
+    padding: clamp(12px, 2vw, 16px);
     cursor: default;
 }
 
 .about__highlight-icon {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     flex-shrink: 0;
 }
 
 .about__highlight-label {
-    font-size: 14px;
+    font-size: clamp(12px, 1.2vw, 14px);
     font-weight: 600;
     color: var(--text-primary);
 }
 
 .about__highlight-desc {
-    font-size: 12px;
+    font-size: clamp(10px, 1vw, 12px);
     color: var(--text-muted);
     margin-top: 2px;
 }
@@ -212,45 +212,26 @@
 /* Actions */
 .about__actions {
     display: flex;
-    gap: 16px;
+    gap: clamp(12px, 2vw, 16px);
     flex-wrap: wrap;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
     .about__grid {
         grid-template-columns: 1fr;
-        gap: 60px;
+        gap: clamp(40px, 5vw, 60px);
         text-align: center;
     }
 
     .about__image-col {
         order: -1;
     }
+}
 
-    .about__image-wrapper {
-        width: 280px;
-        height: 280px;
-    }
-
-    .about__ring--1 {
-        width: 280px;
-        height: 280px;
-    }
-
-    .about__ring--2 {
-        width: 230px;
-        height: 230px;
-    }
-
-    .about__ring--3 {
-        width: 180px;
-        height: 180px;
-    }
-
-    .about__avatar {
-        width: 150px;
-        height: 150px;
+@media (max-width: 768px) {
+    .about__grid {
+        gap: clamp(30px, 4vw, 50px);
     }
 
     .about__badge--1 {
@@ -266,8 +247,29 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+    .about {
+        padding: clamp(20px, 3vw, 30px) clamp(0.75rem, 2vw, 1rem) !important;
+    }
+
     .about__highlights {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .about__bio {
+        font-size: clamp(0.9rem, 1.3vw, 1rem);
+    }
+
+    .about__highlight-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .about {
+        padding: 16px 8px 24px !important;
     }
 }
