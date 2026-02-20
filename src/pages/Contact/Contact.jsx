@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, useCallback, memo } from 'react';
 import './Contact.css';
 
+const API = import.meta.env.VITE_API_URL;
+
 const Contact = () => {
     const sectionRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -40,7 +42,7 @@ const Contact = () => {
         setErrorMessage('');
 
         try {
-            const response = await fetch('http://localhost:5001/api/contact', {
+            const response = await fetch(`${API}/api/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -2,13 +2,17 @@ import express from 'express';
 import cors from 'cors';
 import fs from 'fs-extra';
 import path from 'path';
+
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 const DATA_FILE = path.join(__dirname, 'submissions.json');
 
 // Middleware
