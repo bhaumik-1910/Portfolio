@@ -297,7 +297,7 @@
 
 @media (max-width: 600px) {
     .hero {
-        padding: 0px 12px 30px;
+        padding: 0px 12px 30px; 
         margin-top: -30px;
     }
 
