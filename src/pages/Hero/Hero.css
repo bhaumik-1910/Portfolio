@@ -297,7 +297,8 @@
 
 @media (max-width: 600px) {
     .hero {
-        padding: 60px 12px 30px;
+        padding: 0px 12px 30px;
+        margin-top: -30px;
     }
 
     /* Disable heavy blur orbs on mobile — biggest scroll jank culprit */
