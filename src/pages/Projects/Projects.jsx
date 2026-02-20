@@ -36,7 +36,7 @@ const projectsData = [
         gradient: 'linear-gradient(135deg, #052e16, #064e3b)',
         accentColor: '#22c55e',
         tags: ['Next.js', 'TypeScript', 'Node.js', 'Firebase', 'Security', 'Tailwind'],
-        liveUrl: 'https://github.com/bhaumik-1910/Cyber-Guard',
+        liveUrl: 'https://cyber-guard-chi.vercel.app/',
         githubUrl: 'https://github.com/bhaumik-1910/Cyber-Guard',
         emoji: '🛡️',
     },
