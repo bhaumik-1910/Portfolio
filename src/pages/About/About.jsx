@@ -1,5 +1,11 @@
-import { useEffect, useRef, memo } from 'react';
+import { useRef, memo } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './About.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const highlights = [
     { icon: '🚀', label: 'Full Stack', desc: 'End-to-end development' },
@@ -10,31 +16,65 @@ const highlights = [
 
 const About = () => {
     const sectionRef = useRef(null);
+    const imageRef = useRef(null);
+    const contentRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+    useGSAP(() => {
+        // Image Side Animation
+        gsap.from(imageRef.current, {
+            opacity: 0,
+            x: -50,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: imageRef.current,
+                start: 'top 80%',
+            }
+        });
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
+        // Rings continuous rotation
+        gsap.to('.about__ring', {
+            rotation: 360,
+            duration: 20,
+            repeat: -1,
+            ease: 'none'
+        });
+
+        // Content Side Reveal
+        const contentElements = contentRef.current.children;
+        gsap.from(contentElements, {
+            opacity: 0,
+            x: 50,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: contentRef.current,
+                start: 'top 80%',
+            }
+        });
+
+        // Highlights Stagger
+        gsap.from('.about__highlight-card', {
+            opacity: 0,
+            y: 20,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'back.out(1.7)',
+            scrollTrigger: {
+                trigger: '.about__highlights',
+                start: 'top 90%',
+            }
+        });
+
+    }, { scope: sectionRef });
 
     return (
         <section className="section about" id="about" ref={sectionRef}>
             <div className="section-inner">
                 <div className="about__grid">
-                    {/* Left - Image (Directly embedded SVGs for performance) */}
-                    <div className="about__image-col animate-on-scroll">
+                    {/* Left - Image */}
+                    <div className="about__image-col" ref={imageRef}>
                         <div className="about__image-wrapper">
                             <div className="about__ring about__ring--1" />
                             <div className="about__ring about__ring--2" />
@@ -72,8 +112,8 @@ const About = () => {
                     </div>
 
                     {/* Right - Content */}
-                    <div className="about__content">
-                        <div className="animate-on-scroll animate-delay-1">
+                    <div className="about__content" ref={contentRef}>
+                        <div className="about__header-reveal">
                             <span className="section-label">About Me</span>
                             <h2 className="section-title">
                                 Passionate Developer,{' '}
@@ -81,16 +121,16 @@ const About = () => {
                             </h2>
                         </div>
 
-                        <p className="about__bio animate-on-scroll animate-delay-2">
+                        <p className="about__bio">
                             Hi, I&apos;m <strong>Bhaumik Kothiya</strong> — a dedicated Full Stack Developer with over 1.5 years of experience in creating innovative web solutions. My journey in technology is driven by a passion for solving complex problems and building applications that make a difference. I take pride in delivering high-quality, scalable code that meets both user needs and business objectives.
                         </p>
 
-                        <p className="about__bio animate-on-scroll animate-delay-3">
+                        <p className="about__bio">
                             Specializing in the <strong>MERN stack</strong>, I have successfully delivered diverse projects ranging from enterprise-level documentation portals to real-time collaborative tools. My expertise extends beyond standard web development to include <strong>AI/ML integration</strong>, cloud services, and automated publishing platforms. I am constantly exploring new technologies to stay at the forefront of modern web engineering.
                         </p>
 
                         {/* Highlights */}
-                        <div className="about__highlights animate-on-scroll animate-delay-4">
+                        <div className="about__highlights">
                             {highlights.map((h) => (
                                 <div key={h.label} className="about__highlight-card glass-card">
                                     <span className="about__highlight-icon">{h.icon}</span>
@@ -103,7 +143,7 @@ const About = () => {
                         </div>
 
                         {/* Actions */}
-                        <div className="about__actions animate-on-scroll animate-delay-5">
+                        <div className="about__actions">
                             <a
                                 href="/Kothiya Bhaumik.pdf"
                                 className="btn btn-primary"

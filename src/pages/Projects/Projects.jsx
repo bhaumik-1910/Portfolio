@@ -1,5 +1,11 @@
-import { useEffect, useRef, memo } from 'react';
+import { useRef, memo } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Projects.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const projectsData = [
     {
@@ -140,29 +146,57 @@ const projectsData = [
 
 const Projects = () => {
     const sectionRef = useRef(null);
+    const gridRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
+    useGSAP(() => {
+        // Header animation
+        gsap.from('.projects__header > *', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.projects__header',
+                start: 'top 85%',
+            }
+        });
+
+        // Grid cards animation
+        gsap.from('.project-card', {
+            opacity: 0,
+            y: 50,
+            scale: 0.95,
+            duration: 0.8,
+            stagger: {
+                amount: 0.8,
+                grid: [Math.ceil(projectsData.length / 3), 3],
+                from: 'start'
             },
-            { threshold: 0.1 }
-        );
+            ease: 'back.out(1.4)',
+            scrollTrigger: {
+                trigger: gridRef.current,
+                start: 'top 80%',
+            }
+        });
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
+        // Footer button animation
+        gsap.from('.projects__footer', {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.projects__footer',
+                start: 'top 90%',
+            }
+        });
+    }, { scope: sectionRef });
 
     return (
         <section className="section projects" id="projects" ref={sectionRef}>
             <div className="section-inner">
-                <div className="projects__header animate-on-scroll">
+                <div className="projects__header">
                     <span className="section-label">Selected Works</span>
                     <h2 className="section-title">
                         Featured <span className="gradient-text">Projects</span>
@@ -173,11 +207,11 @@ const Projects = () => {
                     </p>
                 </div>
 
-                <div className="projects__grid">
-                    {projectsData.map((project, idx) => (
+                <div className="projects__grid" ref={gridRef}>
+                    {projectsData.map((project) => (
                         <div
                             key={project.id}
-                            className={`project-card glass-card animate-on-scroll animate-delay-${(idx % 3) + 1}`}
+                            className="project-card glass-card"
                             id={`project-card-${project.id}`}
                         >
                             <div
@@ -267,7 +301,7 @@ const Projects = () => {
                     ))}
                 </div>
 
-                <div className="projects__footer animate-on-scroll">
+                <div className="projects__footer">
                     <a
                         href="https://github.com/bhaumik-1910"
                         target="_blank"

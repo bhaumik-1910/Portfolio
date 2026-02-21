@@ -1,5 +1,11 @@
-import { useEffect, useRef, memo } from 'react';
+import { useRef, memo } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Education.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const educationData = [
     {
@@ -75,30 +81,55 @@ const educationData = [
 
 const Education = () => {
     const sectionRef = useRef(null);
+    const gridRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+    useGSAP(() => {
+        // Header Reveal
+        gsap.from('.education__header > *', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.education__header',
+                start: 'top 85%',
+            }
+        });
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
+        // Cards Staggered Reveal
+        gsap.from('.education__card', {
+            opacity: 0,
+            x: idx => idx % 2 === 0 ? -50 : 50,
+            scale: 0.9,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+                trigger: gridRef.current,
+                start: 'top 80%',
+            }
+        });
+
+        // Hover effect for accent line (subtle scale)
+        const cards = gsap.utils.toArray('.education__card');
+        cards.forEach((card) => {
+            const line = card.querySelector('.education__accent-line');
+            card.addEventListener('mouseenter', () => {
+                gsap.to(line, { scaleX: 1.1, duration: 0.4, ease: 'power2.out' });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(line, { scaleX: 1, duration: 0.4, ease: 'power2.out' });
+            });
+        });
+
+    }, { scope: sectionRef });
 
     return (
         <section className="section education" id="education" ref={sectionRef}>
             <div className="section-inner">
                 {/* Header */}
-                <div className="education__header animate-on-scroll">
+                <div className="education__header">
                     <span className="section-label">Academic Background</span>
                     <h2 className="section-title">
                         My <span className="gradient-text">Education</span>
@@ -109,11 +140,11 @@ const Education = () => {
                 </div>
 
                 {/* Education Grid */}
-                <div className="education__grid">
-                    {educationData.map((edu, idx) => (
+                <div className="education__grid" ref={gridRef}>
+                    {educationData.map((edu) => (
                         <div
                             key={edu.id}
-                            className={`education__card glass-card animate-on-scroll animate-delay-${idx + 1}`}
+                            className="education__card glass-card"
                         >
                             <div className="education__card-header">
                                 <div

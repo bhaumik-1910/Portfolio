@@ -1,5 +1,11 @@
-import { useEffect, useRef, memo } from 'react';
+import { useRef, memo } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Skills.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const skillCategories = [
     // ... items as they are
@@ -82,35 +88,68 @@ const marqueeIcons = [...techIcons, ...techIcons];
 
 const Skills = () => {
     const sectionRef = useRef(null);
+    const gridRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                        entry.target.querySelectorAll('.skills__bar-fill').forEach((bar) => {
-                            const level = bar.getAttribute('data-level');
-                            setTimeout(() => {
-                                bar.style.width = level + '%';
-                            }, 300);
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+    useGSAP(() => {
+        // Header Reveal
+        gsap.from('.skills__header > *', {
+            opacity: 0,
+            y: 30,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.skills__header',
+                start: 'top 85%',
+            }
+        });
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
+        // Marquee Reveal
+        gsap.from('.skills__marquee', {
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+                trigger: '.skills__marquee',
+                start: 'top 90%',
+            }
+        });
+
+        // Category Cards Reveal
+        gsap.from('.skills__category', {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: gridRef.current,
+                start: 'top 80%',
+            }
+        });
+
+        // Progress Bar Fill Animation
+        const bars = gsap.utils.toArray('.skills__bar-fill');
+        bars.forEach((bar) => {
+            const level = bar.getAttribute('data-level');
+            gsap.to(bar, {
+                width: `${level}%`,
+                duration: 1.5,
+                ease: 'power4.out',
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 95%',
+                }
+            });
+        });
+
+    }, { scope: sectionRef });
 
     return (
         <section className="section skills" id="skills" ref={sectionRef}>
             <div className="section-inner">
-                <div className="skills__header animate-on-scroll">
+                <div className="skills__header">
                     <span className="section-label">My Expertise</span>
                     <h2 className="section-title">
                         Technical <span className="gradient-text">Skills</span>
@@ -121,7 +160,7 @@ const Skills = () => {
                     </p>
                 </div>
 
-                <div className="skills__marquee animate-on-scroll animate-delay-1">
+                <div className="skills__marquee">
                     <div className="skills__marquee-track">
                         {marqueeIcons.map((tech, idx) => (
                             <div key={`${tech.name}-${idx}`} className="skills__tech-icon glass-card" title={tech.name}>
@@ -134,11 +173,11 @@ const Skills = () => {
                     </div>
                 </div>
 
-                <div className="skills__grid">
-                    {skillCategories.map((cat, catIdx) => (
+                <div className="skills__grid" ref={gridRef}>
+                    {skillCategories.map((cat) => (
                         <div
                             key={cat.id}
-                            className={`skills__category glass-card animate-on-scroll animate-delay-${catIdx + 1}`}
+                            className="skills__category glass-card"
                         >
                             <div className="skills__cat-header">
                                 <div

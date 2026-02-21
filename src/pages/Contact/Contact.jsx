@@ -1,36 +1,68 @@
-import { useEffect, useRef, useState, useCallback, memo } from 'react';
+import { useRef, useState, useCallback, memo } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Contact.css';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const API = import.meta.env.VITE_API_URL;
 
 const Contact = () => {
     const sectionRef = useRef(null);
+    const infoRef = useRef(null);
+    const formRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         subject: '',
         message: '',
     });
-    const [status, setStatus] = useState(null); // 'sending', 'success', 'error'
+    const [status, setStatus] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
+    useGSAP(() => {
+        // Info Side Reveal
+        gsap.from(infoRef.current.children, {
+            opacity: 0,
+            x: -30,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: infoRef.current,
+                start: 'top 85%',
+            }
+        });
 
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
+        // Form Side Reveal
+        gsap.from(formRef.current, {
+            opacity: 0,
+            x: 30,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: formRef.current,
+                start: 'top 85%',
+            }
+        });
+
+        // Magnetic effect for social buttons
+        const socialBtns = gsap.utils.toArray('.social-btn');
+        socialBtns.forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3 });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+            });
+        });
+
+    }, { scope: sectionRef });
 
     const handleChange = useCallback((e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -72,7 +104,7 @@ const Contact = () => {
             <div className="section-inner">
                 <div className="contact__grid">
                     {/* Left - Info */}
-                    <div className="contact__info animate-on-scroll">
+                    <div className="contact__info" ref={infoRef}>
                         <span className="section-label">Get In Touch</span>
                         <h2 className="section-title">
                             Let&apos;s Work <span className="gradient-text">Together</span>
@@ -148,7 +180,7 @@ const Contact = () => {
                     </div>
 
                     {/* Right - Form */}
-                    <div className="contact__form-col animate-on-scroll animate-delay-1">
+                    <div className="contact__form-col" ref={formRef}>
                         <form className="contact__form glass-card" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="name" className="form-label">Full Name</label>

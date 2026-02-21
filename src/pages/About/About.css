@@ -216,6 +216,7 @@
     display: flex;
     gap: clamp(12px, 2vw, 16px);
     flex-wrap: wrap;
+    margin-top: clamp(24px, 4vw, 32px);
 }
 
 /* Responsive Design */
