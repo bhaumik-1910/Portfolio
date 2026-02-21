@@ -120,7 +120,7 @@ const projectsData = [
         gradient: 'linear-gradient(135deg, #1e3a8a, #1d4ed8)',
         accentColor: '#60a5fa',
         tags: ['HTML5', 'CSS3', 'Responsive Design', 'UI/UX'],
-        liveUrl: 'https://github.com/bhaumik-1910/IT-Academy-Lenging-Page',
+        liveUrl: 'https://academy-lenging.vercel.app/',
         githubUrl: 'https://github.com/bhaumik-1910/IT-Academy-Lenging-Page',
         emoji: '🎓',
     },
