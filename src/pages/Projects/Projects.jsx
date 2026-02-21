@@ -38,7 +38,7 @@ const projectsData = [
         tags: ['HTML', 'JavaScript', 'React.js', 'CSS', 'Bootstrap',],
         liveUrl: 'https://textutilze-alpha.vercel.app/',
         githubUrl: 'https://github.com/bhaumik-1910/Textutilze',
-        emoji: '🛡️',
+        emoji: '📝',
     },
     {
         id: 4,
