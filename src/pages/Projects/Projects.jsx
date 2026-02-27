@@ -7,6 +7,7 @@ import './Projects.css';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+//Projects data array with enhanced styling properties
 const projectsData = [
     {
         id: 1,
