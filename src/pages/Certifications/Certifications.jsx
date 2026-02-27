@@ -29,6 +29,15 @@ const certificationsData = [
         color: "#0056D2",
         icon: "🤖"
     },
+    {
+        id: 4,
+        title: "LJ Innovation Village 2026 – Certificate of Participation",
+        issuer: "LJ University",
+        date: "2026",
+        link: "/Innovation.pdf",
+        color: "#F59E0B",
+        icon: "🏆"
+    },
 ];
 
 const Certifications = () => {
