@@ -32,11 +32,7 @@ function Work() {
                 {
                     activeTab === "webDesign" && <Web />
                 }
-
-
             </div>
-
-
         </>
     )
 }
