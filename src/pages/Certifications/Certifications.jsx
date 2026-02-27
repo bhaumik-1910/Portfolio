@@ -1,7 +1,6 @@
 import { useEffect, useRef, memo } from 'react';
 import './Certifications.css';
 
-
 //Certifications data array with enhanced styling properties
 const certificationsData = [
     {

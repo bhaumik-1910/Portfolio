@@ -14,7 +14,6 @@ function Contact() {
                         Contact
                     </h2>
 
-
                     <h1 className="animate__animated animate__fadeInUp">
                         I’m always on the lookout for exciting opportunities, meaningful collaborations, or simply great conversations. Whether you have a project idea, need help solving a problem, or just want to chat about code, feel free to reach out!
                     </h1>
@@ -36,8 +35,6 @@ function Contact() {
                             <FontAwesomeIcon icon={faGithub} />
                         </a>
                     </div>
-
-
                 </div>
             </div>
         </>
