@@ -37,6 +37,18 @@ const projectsData = [
     },
     {
         id: 3,
+        title: 'Neurovia AI',
+        description: "Users can generate and use their own AI API keys, allowing them to easily integrate AI into their own projects and build customized solutions.",
+        image: null,
+        gradient: 'linear-gradient(135deg, #042f2e, #0d9488)',
+        accentColor: '#14b8a6',
+        tags: ['React', 'Node.js', 'MongoDB', 'AI (MCP)', 'NLP'],
+        liveUrl: 'https://neurovia-ai-psi.vercel.app/',
+        githubUrl: '#',
+        emoji: '🇮🇳',
+    },
+    {
+        id: 4,
         title: 'TextUtilize',
         description: 'A powerful and user-friendly text utility web application that allows users to transform, analyze, and manipulate text efficiently. Features include case conversion, word and character counting, text formatting, and instant preview with a clean responsive UI.',
         image: null,
@@ -48,7 +60,7 @@ const projectsData = [
         emoji: '📝',
     },
     {
-        id: 4,
+        id: 5,
         title: 'Cyber-Guard',
         description: 'A deep-scan security auditing and network protection suite designed to identify vulnerabilities and secure digital infrastructures using advanced scanning algorithms.',
         image: null,
@@ -60,7 +72,7 @@ const projectsData = [
         emoji: '🛡️',
     },
     {
-        id: 5,
+        id: 6,
         title: 'QuickCart-Ecommerce',
         description: 'Scalable e-commerce solution with real-time inventory management, multi-vendor support, secure payment gateway, and an advanced analytics dashboard for sellers.',
         image: null,
@@ -72,7 +84,7 @@ const projectsData = [
         emoji: '🛒',
     },
     {
-        id: 6,
+        id: 7,
         title: 'Real-time Editor',
         description: 'A collaborative document editing platform that allows multiple users to edit documents simultaneously with real-time cursor tracking and version history.',
         image: null,
@@ -84,7 +96,7 @@ const projectsData = [
         emoji: '📄',
     },
     {
-        id: 7,
+        id: 8,
         title: 'Crypto_Flow-UI',
         description: 'A sleek, modern cryptocurrency tracking dashboard providing real-time price feeds, portfolio heatmaps, and transaction history with high-performance charts.',
         image: null,
@@ -96,7 +108,7 @@ const projectsData = [
         emoji: '💎',
     },
     {
-        id: 8,
+        id: 9,
         title: 'Car_Rental_UI',
         description: 'A specialized car rental management system featuring vehicle categorization, availability calendars, automated billing, and user-friendly booking workflows.',
         image: null,
@@ -108,7 +120,7 @@ const projectsData = [
         emoji: '🚗',
     },
     {
-        id: 9,
+        id: 10,
         title: 'Fast_Food-UI',
         description: 'A vibrant food ordering application UI focusing on user experience, featuring dynamic menu filtering, interactive cart, and seamless order tracking.',
         image: null,
@@ -120,7 +132,7 @@ const projectsData = [
         emoji: '🍔',
     },
     {
-        id: 10,
+        id: 11,
         title: 'Nike-Shoes-Template',
         description: 'High-performance landing page design focusing on storytelling and interactive product displays with smooth scroll animations and modern typography.',
         image: null,
@@ -132,7 +144,7 @@ const projectsData = [
         emoji: '👟',
     },
     {
-        id: 11,
+        id: 12,
         title: 'IT Academy Landing Page',
         description: 'A professional, responsive landing page for an IT academy. Features course listings, an "About" section, and a clean, modern UI optimized for both mobile and desktop users.',
         image: null,
