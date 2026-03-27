@@ -6,32 +6,42 @@
 
 .education__header {
     text-align: center;
-    margin-bottom: clamp(30px, 5vw, 50px);
+    margin-bottom: clamp(40px, 7vw, 64px); /* Increased spacing for better hierarchy */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
 .education__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(20px, 3vw, 30px);
+    grid-auto-rows: 1fr; /* Force EVERY single card in the whole section to have the EXACT same height */
+    gap: clamp(30px, 5vw, 48px);
+    align-items: stretch;
 }
 
 .education__card {
     position: relative;
-    padding: clamp(20px, 3vw, 32px);
+    padding: clamp(28px, 5vw, 40px);
     display: flex;
     flex-direction: column;
     gap: clamp(16px, 2.5vw, 24px);
+    height: 100%;
+    justify-content: space-between; /* Ensures the icon is at top and content/accent at bottom */
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    will-change: transform;
+    will-change: transform, opacity;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
 }
 
 .education__card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .education__card-header {
@@ -84,7 +94,8 @@
 .education__content {
     display: flex;
     flex-direction: column;
-    gap: clamp(10px, 1.5vw, 12px);
+    gap: clamp(12px, 2vw, 16px);
+    flex-grow: 1; /* Push the card bottom to the same level */
 }
 
 .education__degree {
@@ -128,10 +139,11 @@
 }
 
 .education__desc {
-    font-size: clamp(12px, 1.3vw, 14px);
+    font-size: clamp(13px, 1.4vw, 15px);
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     text-align: justify;
+    margin-bottom: auto; /* Pushes highlights to the bottom consistently */
 }
 
 .education__highlights {
@@ -162,7 +174,9 @@
     left: 0;
     width: 100%;
     height: clamp(2px, 0.5vw, 3px);
-    opacity: 0.5;
+    opacity: 0.3;
+    transform-origin: left;
+    transition: opacity 0.4s ease;
 }
 
 /* Responsive Design */
@@ -184,9 +198,14 @@
         padding: 30px 0 !important;
     }
 
+    .education__header {
+        margin-bottom: 40px;
+    }
+
     .education__grid {
         /* Single column only on phone */
         grid-template-columns: 1fr;
+        gap: 24px;
     }
 
     .education__card {

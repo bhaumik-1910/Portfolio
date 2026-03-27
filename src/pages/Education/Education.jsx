@@ -88,38 +88,51 @@ const Education = () => {
         gsap.from('.education__header > *', {
             opacity: 0,
             y: 30,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out',
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power2.out',
             scrollTrigger: {
                 trigger: '.education__header',
                 start: 'top 85%',
+                toggleActions: 'play none none reverse'
             }
         });
 
-        // Cards Staggered Reveal
-        gsap.from('.education__card', {
-            opacity: 0,
-            x: idx => idx % 2 === 0 ? -50 : 50,
-            scale: 0.9,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'expo.out',
-            scrollTrigger: {
-                trigger: gridRef.current,
-                start: 'top 80%',
-            }
+        // Cards reveal - individual triggers for smoother scrolling connection
+        const cardElements = gsap.utils.toArray('.education__card');
+        cardElements.forEach((card, idx) => {
+            gsap.fromTo(card,
+                {
+                    opacity: 0,
+                    y: 80,
+                    scale: 0.95
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 92%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
         });
 
-        // Hover effect for accent line (subtle scale)
+        // Hover effect for accent line
         const cards = gsap.utils.toArray('.education__card');
         cards.forEach((card) => {
             const line = card.querySelector('.education__accent-line');
             card.addEventListener('mouseenter', () => {
-                gsap.to(line, { scaleX: 1.1, duration: 0.4, ease: 'power2.out' });
+                gsap.to(line, { scaleX: 1.1, duration: 0.4, ease: 'power2.out', opacity: 1 });
+                gsap.to(card, { y: -5, duration: 0.3, ease: 'power2.out' });
             });
             card.addEventListener('mouseleave', () => {
-                gsap.to(line, { scaleX: 1, duration: 0.4, ease: 'power2.out' });
+                gsap.to(line, { scaleX: 1, duration: 0.4, ease: 'power2.out', opacity: 0.5 });
+                gsap.to(card, { y: 0, duration: 0.3, ease: 'power2.out' });
             });
         });
 

@@ -1,4 +1,4 @@
-import { useRef, memo } from 'react';
+import { useRef, memo, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,61 +8,75 @@ import './Skills.css';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const skillCategories = [
-    // ... items as they are
-    {
-        id: 'frontend',
-        title: 'Frontend',
-        icon: '🎨',
-        color: '#3b82f6',
-        skills: [
-            { name: 'HTML5', level: 90, icon: '📄' },
-            { name: 'CSS3 / Sass', level: 90, icon: '🎨' },
-            { name: 'JavaScript', level: 95, icon: 'JS' },
-            { name: 'React.js', level: 95, icon: '⚛️' },
-            { name: 'Next.js', level: 90, icon: '▲' },
-            { name: 'Tailwind CSS', level: 92, icon: '🌊' },
-            { name: 'Bootstrap', level: 88, icon: 'B' },
-            { name: 'MUI / Shadcn', level: 90, icon: '🎨' },
-            { name: 'Motion UI', level: 85, icon: '✨' },
-        ],
-    },
     {
         id: 'backend',
         title: 'Backend',
-        icon: '⚙️',
-        color: '#8b5cf6',
         skills: [
-            { name: 'Node.js', level: 93, icon: '🟢' },
-            { name: 'Express.js', level: 90, icon: '🚂' },
-            { name: 'REST APIs', level: 95, icon: '🔗' },
-            { name: 'Python', level: 75, icon: '🐍' },
-            { name: 'GraphQL', level: 65, icon: '◈' },
+            { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+            { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+            { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+            { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+            { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+            { name: 'ASP.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
+            { name: 'SQL Server', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg' },
+            { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+            // { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+            // { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+            // { name: '.NET Core', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg' },
         ],
     },
     {
-        id: 'database',
-        title: 'Database',
-        icon: '🗄️',
-        color: '#06b6d4',
+        id: 'web',
+        title: 'Web',
         skills: [
-            { name: 'MongoDB', level: 92, icon: '🍃' },
-            { name: 'MySQL', level: 85, icon: '🐬' },
-            { name: 'Firebase', level: 78, icon: '🔥' },
-            { name: 'PostgreSQL', level: 60, icon: '🐘' },
-            { name: 'Redis', level: 50, icon: '🔴' },
+            { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+            { name: 'Vite.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg' },
+            { name: 'React.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+            { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+            { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
+            // { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+            { name: 'Tailwind', icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
+            { name: 'Shadcn/UI', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/shadcnui.svg' },
+            { name: 'Motion UI', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/framer.svg' },
+            { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+            { name: 'Sass', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg' },
+            { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+            { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+        ],
+    },
+    {
+        id: 'mobile',
+        title: 'Mobile',
+        skills: [
+            { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+            { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+            // { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg' },
+            // { name: 'iOS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg' },
         ],
     },
     {
         id: 'devops',
-        title: 'DevOps & Tools',
-        icon: '🚀',
-        color: '#10b981',
+        title: 'DevOps',
         skills: [
-            { name: 'Git & GitHub', level: 95, icon: '🐙' },
-            { name: 'Docker', level: 78, icon: '🐳' },
-            { name: 'CI/CD', level: 75, icon: '♾️' },
-            { name: 'AWS', level: 72, icon: '☁️' },
-            { name: 'Linux', level: 50, icon: '🐧' },
+            // { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+            { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+            { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+            { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+            { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+            // { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
+        ],
+    },
+    {
+        id: 'others',
+        title: 'Others',
+        skills: [
+            { name: 'PayPal', icon: 'https://www.vectorlogo.zone/logos/paypal/paypal-icon.svg' },
+            { name: 'Stripe', icon: 'https://www.vectorlogo.zone/logos/stripe/stripe-icon.svg' },
+            { name: 'Postman', icon: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
+            { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+            { name: 'Canva', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg' }
+            // { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+            // { name: 'Socket.io', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg' },
         ],
     },
 ];
@@ -88,7 +102,10 @@ const marqueeIcons = [...techIcons, ...techIcons];
 
 const Skills = () => {
     const sectionRef = useRef(null);
-    const gridRef = useRef(null);
+    const contentRef = useRef(null);
+    const [activeTab, setActiveTab] = useState('backend');
+
+    const activeSkills = skillCategories.find(cat => cat.id === activeTab)?.skills || [];
 
     useGSAP(() => {
         // Header Reveal
@@ -96,7 +113,7 @@ const Skills = () => {
             opacity: 0,
             y: 30,
             duration: 1,
-            stagger: 0.2,
+            stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.skills__header',
@@ -116,47 +133,47 @@ const Skills = () => {
             }
         });
 
-        // Category Cards Reveal
-        gsap.from('.skills__category', {
+        // Main Layout Reveal
+        gsap.from('.skills__layout', {
             opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power2.out',
+            y: 50,
+            duration: 1,
+            ease: 'power3.out',
             scrollTrigger: {
-                trigger: gridRef.current,
+                trigger: '.skills__layout',
                 start: 'top 80%',
             }
         });
-
-        // Progress Bar Fill Animation
-        const bars = gsap.utils.toArray('.skills__bar-fill');
-        bars.forEach((bar) => {
-            const level = bar.getAttribute('data-level');
-            gsap.to(bar, {
-                width: `${level}%`,
-                duration: 1.5,
-                ease: 'power4.out',
-                scrollTrigger: {
-                    trigger: bar,
-                    start: 'top 95%',
-                }
-            });
-        });
-
     }, { scope: sectionRef });
+
+    // Handle tab change with animation
+    const handleTabChange = (id) => {
+        if (id === activeTab) return;
+
+        gsap.to(contentRef.current, {
+            opacity: 0,
+            x: -20,
+            duration: 0.3,
+            onComplete: () => {
+                setActiveTab(id);
+                gsap.fromTo(contentRef.current,
+                    { opacity: 0, x: 20 },
+                    { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
+                );
+            }
+        });
+    };
 
     return (
         <section className="section skills" id="skills" ref={sectionRef}>
             <div className="section-inner">
                 <div className="skills__header">
-                    <span className="section-label">My Expertise</span>
+                    <span className="section-label">Expertise Deck</span>
                     <h2 className="section-title">
-                        Technical <span className="gradient-text">Skills</span>
+                        My Technical <span className="gradient-text">Stack</span>
                     </h2>
                     <p className="section-subtitle">
-                        A comprehensive toolkit built over years of hands-on development experience
-                        across the full stack.
+                        A curated selection of technologies and tools I use to build industrial-grade applications.
                     </p>
                 </div>
 
@@ -173,51 +190,51 @@ const Skills = () => {
                     </div>
                 </div>
 
-                <div className="skills__grid" ref={gridRef}>
-                    {skillCategories.map((cat) => (
-                        <div
-                            key={cat.id}
-                            className="skills__category glass-card"
-                        >
-                            <div className="skills__cat-header">
-                                <div
-                                    className="skills__cat-icon"
-                                    style={{ background: `${cat.color}20`, border: `1px solid ${cat.color}40` }}
-                                >
-                                    <span>{cat.icon}</span>
+                <div className="skills__layout glass-card">
+                    {/* Sidebar Tabs */}
+                    <div className="skills__sidebar">
+                        {skillCategories.map((cat) => (
+                            <button
+                                key={cat.id}
+                                className={`skills__tab ${activeTab === cat.id ? 'active' : ''}`}
+                                onClick={() => handleTabChange(cat.id)}
+                            >
+                                <div className="skills__tab-indicator">
+                                    {activeTab === cat.id ? (
+                                        <svg viewBox="0 0 24 24" fill="none" className="check-icon">
+                                            <circle cx="12" cy="12" r="12" fill="#f59e0b" />
+                                            <path d="M7 12l3 3 7-7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    ) : (
+                                        <div className="circle-outline" />
+                                    )}
                                 </div>
-                                <h3 className="skills__cat-title" style={{ color: cat.color }}>
-                                    {cat.title}
-                                </h3>
-                            </div>
+                                <span className="skills__tab-label">{cat.title}</span>
+                            </button>
+                        ))}
+                    </div>
 
-                            <div className="skills__list">
-                                {cat.skills.map((skill) => (
-                                    <div key={skill.name} className="skills__item">
-                                        <div className="skills__item-header">
-                                            <div className="skills__item-name">
-                                                <span>{skill.icon}</span>
-                                                <span>{skill.name}</span>
+                    {/* Skill Logos Grid */}
+                    <div className="skills__content" ref={contentRef}>
+                        <div className="skills__logo-grid">
+                            {/* Force minimum 8 slots (4x2 grid) for every category to look consistent like Backend */}
+                            {[...Array(Math.max(8, Math.ceil(activeSkills.length / 4) * 4))].map((_, idx) => {
+                                const skill = activeSkills[idx];
+                                return (
+                                    <div key={skill?.name || `empty-${idx}`} className="skills__logo-item">
+                                        {skill && (
+                                            <div className="skills__logo-wrapper">
+                                                <img src={skill.icon} alt={skill.name} className="skills__logo-img" />
+                                                <span className="skills__logo-name">{skill.name}</span>
                                             </div>
-                                            <span className="skills__item-level" style={{ color: cat.color }}>
-                                                {skill.level}%
-                                            </span>
-                                        </div>
-                                        <div className="skills__bar">
-                                            <div
-                                                className="skills__bar-fill"
-                                                data-level={skill.level}
-                                                style={{
-                                                    background: `linear-gradient(90deg, ${cat.color}, ${cat.color}99)`,
-                                                    width: '0%',
-                                                }}
-                                            />
-                                        </div>
+                                        )}
+                                        <div className="grid-line horizontal" />
+                                        <div className="grid-line vertical" />
                                     </div>
-                                ))}
-                            </div>
+                                );
+                            })}
                         </div>
-                    ))}
+                    </div>
                 </div>
             </div>
         </section>
