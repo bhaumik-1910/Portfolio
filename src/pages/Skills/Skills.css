@@ -253,10 +253,16 @@
         width: 100%;
         flex-direction: row;
         overflow-x: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         padding: 12px;
         gap: 8px;
+    }
+
+    .skills__sidebar::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome, Safari and Opera */
     }
     .skills__tab {
         padding: 10px 16px;
