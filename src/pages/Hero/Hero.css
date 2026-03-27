@@ -293,8 +293,13 @@
 
 @media (max-width: 600px) {
     .hero {
-        padding: 0px 12px 30px; 
-        margin-top: -30px;
+        /* padding: 0px 12px 30px;
+        margin-top: -30px; */
+        padding: 80px 16px 140px;
+        /* Leave space for mouse icon */
+        min-height: 100vh;
+        justify-content: flex-end;
+        margin-top: 0;
     }
 
     /* Disable heavy blur orbs on mobile — biggest scroll jank culprit */
