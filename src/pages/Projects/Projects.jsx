@@ -37,6 +37,18 @@ const projectsData = [
     },
     {
         id: 3,
+        title: 'Land Measurement System',
+        description: 'A smart web-based land measurement system that helps users calculate land area accurately using map-based inputs and real-time data visualization.',
+        image: null,
+        gradient: 'linear-gradient(135deg, #1e3a8a, #2563eb)',
+        accentColor: '#3b82f6',
+        tags: ['React', 'Node.js', 'MongoDB', 'Maps API', 'GeoLocation'],
+        liveUrl: 'https://land-measurement-system-97nl.vercel.app/',
+        githubUrl: '#',
+        emoji: '📍',
+    },
+    {
+        id: 4,
         title: 'Neurovia AI',
         description: "Users can generate and use their own AI API keys, allowing them to easily integrate AI into their own projects and build customized solutions.",
         image: null,
@@ -48,7 +60,7 @@ const projectsData = [
         emoji: '🇮🇳',
     },
     {
-        id: 4,
+        id: 5,
         title: 'TextUtilize',
         description: 'A powerful and user-friendly text utility web application that allows users to transform, analyze, and manipulate text efficiently. Features include case conversion, word and character counting, text formatting, and instant preview with a clean responsive UI.',
         image: null,
@@ -60,7 +72,7 @@ const projectsData = [
         emoji: '📝',
     },
     {
-        id: 5,
+        id: 6,
         title: 'Cyber-Guard',
         description: 'A deep-scan security auditing and network protection suite designed to identify vulnerabilities and secure digital infrastructures using advanced scanning algorithms.',
         image: null,
