@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bhaumik-kothiya.vercel.app/sitemap.xml
