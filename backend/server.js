@@ -133,7 +133,9 @@ app.post('/api/contact', async (req, res) => {
     } catch (error) {
         console.error('Error during contact form backend submission:', error);
         res.status(500).json({
-            error: 'Server processed the message but failed to deliver the email. Please check backend log/SMTP config.'
+            error: 'Server processed the message but failed to deliver the email.',
+            details: error.message,
+            stack: error.stack
         });
     }
 });
