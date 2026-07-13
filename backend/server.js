@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import nodemailer from 'nodemailer';
 import dns from 'dns';
+import https from 'https';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,13 +41,59 @@ app.get('/', (req, res) => {
     res.send('Portfolio Backend Server is running successfully!');
 });
 
+// Helper to send email via Resend API (HTTP-based, bypasses Render SMTP port blocks)
+const sendResendEmail = (resendApiKey, payload) => {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify(payload);
+        const options = {
+            hostname: 'api.resend.com',
+            port: 443,
+            path: '/emails',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${resendApiKey}`,
+                'Content-Length': Buffer.byteLength(data)
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let responseBody = '';
+            res.on('data', (chunk) => {
+                responseBody += chunk;
+            });
+            res.on('end', () => {
+                let parsed;
+                try {
+                    parsed = JSON.parse(responseBody);
+                } catch (e) {
+                    parsed = responseBody;
+                }
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    resolve(parsed);
+                } else {
+                    reject(new Error(`Resend API Error (Status ${res.statusCode}): ${JSON.stringify(parsed)}`));
+                }
+            });
+        });
+
+        req.on('error', (error) => {
+            reject(error);
+        });
+
+        req.write(data);
+        req.end();
+    });
+};
+
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
 
-        console.log('API RECIEVED SUBMISSION:', { name, email, subject, message });
+        console.log('API RECEIVED SUBMISSION:', { name, email, subject, message });
         console.log('CURRENT EMAIL_USER:', process.env.EMAIL_USER);
-        console.log('CURRENT EMAIL_PASS:', process.env.EMAIL_PASS);
+        console.log('CURRENT EMAIL_PASS CONFIGURED:', process.env.EMAIL_PASS ? 'YES' : 'NO');
+        console.log('CURRENT RESEND_API_KEY CONFIGURED:', process.env.RESEND_API_KEY ? 'YES' : 'NO');
 
         if (!name || !email || !message) {
             return res.status(400).json({ error: 'Please fill all required fields.' });
@@ -54,86 +101,107 @@ app.post('/api/contact', async (req, res) => {
 
         const timestamp = new Date().toISOString();
 
-        // Send email via Nodemailer
-        const mailOptions = {
-            from: `"${name}" <${process.env.EMAIL_USER}>`,
-            to: process.env.EMAIL_TO,
-            replyTo: email,
-            subject: `Portfolio Contact Form: ${subject || 'New Message'}`,
-            text: `You have received a new message from your portfolio contact form.\n\n` +
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Subject: ${subject}\n\n` +
-                `Message:\n${message}\n\n` +
-                `Timestamp: ${timestamp}`,
-            html: `
-                <div style="background-color: #0f172a; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100%;">
-                    <div style="max-width: 600px; width: 100%; background: #1e293b; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3); overflow: hidden; margin: 0 auto; text-align: left;">
-                        
-                        <!-- Top Gradient Bar -->
-                        <div style="height: 6px; background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);"></div>
-                        
-                        <!-- Container Header -->
-                        <div style="padding: 32px 32px 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
-                            <div style="display: inline-block; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; margin-bottom: 16px;">
-                                <span style="font-size: 28px; line-height: 1;">✉️</span>
-                            </div>
-                            <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">New Portfolio Enquiry</h2>
-                            <p style="margin: 6px 0 0; font-size: 14px; color: #94a3b8;">You received a message via your personal portfolio website.</p>
-                        </div>
-                        
-                        <!-- Info Grid Details -->
-                        <div style="padding: 24px 32px; background: rgba(15, 23, 42, 0.455);">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; width: 35%;">Sender Name</td>
-                                    <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${name}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Email Address</td>
-                                    <td style="padding: 10px 0; font-size: 15px; color: #3b82f6; font-weight: 500;">
-                                        <a href="mailto:${email}" style="color: #3b82f6; text-decoration: none; border-bottom: 1px dashed rgba(59, 130, 246, 0.4);">${email}</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Subject</td>
-                                    <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${subject || 'No Subject'}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Received At</td>
-                                    <td style="padding: 10px 0; font-size: 14px; color: #94a3b8;">${timestamp}</td>
-                                </tr>
-                            </table>
-                        </div>
+        const emailSubject = `Portfolio Contact Form: ${subject || 'New Message'}`;
+        const emailText = `You have received a new message from your portfolio contact form.\n\n` +
+            `Name: ${name}\n` +
+            `Email: ${email}\n` +
+            `Subject: ${subject}\n\n` +
+            `Message:\n${message}\n\n` +
+            `Timestamp: ${timestamp}`;
 
-                        <!-- Message Content Box -->
-                        <div style="padding: 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); background: #1e293b;">
-                            <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Submitted Message</div>
-                            <div style="background-color: #0f172a; padding: 20px; border-left: 4px solid #8b5cf6; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
-                                <p style="margin: 0; font-size: 15px; color: #e2e8f0; line-height: 1.6; white-space: pre-wrap; font-family: inherit;">${message}</p>
-                            </div>
+        const emailHtml = `
+            <div style="background-color: #0f172a; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100%;">
+                <div style="max-width: 600px; width: 100%; background: #1e293b; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3); overflow: hidden; margin: 0 auto; text-align: left;">
+                    
+                    <!-- Top Gradient Bar -->
+                    <div style="height: 6px; background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);"></div>
+                    
+                    <!-- Container Header -->
+                    <div style="padding: 32px 32px 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
+                        <div style="display: inline-block; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; margin-bottom: 16px;">
+                            <span style="font-size: 28px; line-height: 1;">✉️</span>
                         </div>
+                        <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">New Portfolio Enquiry</h2>
+                        <p style="margin: 6px 0 0; font-size: 14px; color: #94a3b8;">You received a message via your personal portfolio website.</p>
+                    </div>
+                    
+                    <!-- Info Grid Details -->
+                    <div style="padding: 24px 32px; background: rgba(15, 23, 42, 0.455);">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; width: 35%;">Sender Name</td>
+                                <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${name}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Email Address</td>
+                                <td style="padding: 10px 0; font-size: 15px; color: #3b82f6; font-weight: 500;">
+                                    <a href="mailto:${email}" style="color: #3b82f6; text-decoration: none; border-bottom: 1px dashed rgba(59, 130, 246, 0.4);">${email}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Subject</td>
+                                <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${subject || 'No Subject'}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Received At</td>
+                                <td style="padding: 10px 0; font-size: 14px; color: #94a3b8;">${timestamp}</td>
+                            </tr>
+                        </table>
+                    </div>
 
-                        <!-- Footer -->
-                        <div style="padding: 24px 32px; background: #0f172a; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.06);">
-                            <p style="margin: 0; font-size: 11px; color: #64748b; line-height: 1.5;">© ${new Date().getFullYear()} Bhaumik Kothiya. All rights reserved.</p>
-                            <p style="margin: 4px 0 0; font-size: 10px; color: #475569;">Received via Portfolio Contact System.</p>
+                    <!-- Message Content Box -->
+                    <div style="padding: 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); background: #1e293b;">
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Submitted Message</div>
+                        <div style="background-color: #0f172a; padding: 20px; border-left: 4px solid #8b5cf6; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                            <p style="margin: 0; font-size: 15px; color: #e2e8f0; line-height: 1.6; white-space: pre-wrap; font-family: inherit;">${message}</p>
                         </div>
                     </div>
-                </div>
-            `
-        };
 
-        if (process.env.EMAIL_PASS && process.env.EMAIL_PASS !== 'your_gmail_app_password_here') {
-            await transporter.sendMail(mailOptions);
-            console.log('Email sent successfully!');
-            res.status(200).json({ message: 'Message sent and email delivered successfully!' });
-        } else {
-            console.warn('Email credentials not configured yet.');
-            res.status(400).json({
-                error: 'Email SMTP credentials are not configured yet on the server.'
-            });
+                    <!-- Footer -->
+                    <div style="padding: 24px 32px; background: #0f172a; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                        <p style="margin: 0; font-size: 11px; color: #64748b; line-height: 1.5;">© ${new Date().getFullYear()} Bhaumik Kothiya. All rights reserved.</p>
+                        <p style="margin: 4px 0 0; font-size: 10px; color: #475569;">Received via Portfolio Contact System.</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 1. Try Resend HTTP API (works perfectly on Render Free Tier since it does not use SMTP ports)
+        if (process.env.RESEND_API_KEY) {
+            console.log('Attempting delivery via Resend HTTP API...');
+            const resendPayload = {
+                from: 'Portfolio Contact <onboarding@resend.dev>',
+                to: process.env.EMAIL_TO || 'bhaumikkothiya1@gmail.com',
+                reply_to: email,
+                subject: emailSubject,
+                text: emailText,
+                html: emailHtml
+            };
+            await sendResendEmail(process.env.RESEND_API_KEY, resendPayload);
+            console.log('Email delivered successfully via Resend API.');
+            return res.status(200).json({ message: 'Message sent and email delivered successfully!' });
         }
+
+        // 2. Fallback to normal Nodemailer SMTP (useful for local development)
+        if (process.env.EMAIL_PASS && process.env.EMAIL_PASS !== 'your_gmail_app_password_here') {
+            console.log('Attempting delivery via Nodemailer SMTP...');
+            const mailOptions = {
+                from: `"${name}" <${process.env.EMAIL_USER}>`,
+                to: process.env.EMAIL_TO || 'bhaumikkothiya1@gmail.com',
+                replyTo: email,
+                subject: emailSubject,
+                text: emailText,
+                html: emailHtml
+            };
+            await transporter.sendMail(mailOptions);
+            console.log('Email delivered successfully via SMTP.');
+            return res.status(200).json({ message: 'Message sent and email delivered successfully!' });
+        }
+
+        console.warn('Neither Resend API Key nor SMTP password is set.');
+        return res.status(400).json({
+            error: 'Email credentials are not configured on the server.'
+        });
     } catch (error) {
         console.error('Error during contact form backend submission:', error);
         res.status(500).json({
