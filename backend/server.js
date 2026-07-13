@@ -4,6 +4,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import nodemailer from 'nodemailer';
+import dns from 'dns';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +21,11 @@ app.use(express.json());
 // Nodemailer Config
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Upgrade via STARTTLS
+    port: 465,
+    secure: true, // Use SSL/TLS
+    lookup: (hostname, options, callback) => {
+        dns.lookup(hostname, { family: 4 }, callback);
+    },
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
