@@ -46,6 +46,8 @@ const projectsData = [
         liveUrl: 'https://github.com/bhaumik-1910/VendorBridge',
         githubUrl: 'https://github.com/bhaumik-1910/VendorBridge',
         emoji: '🏆',
+        isVirtualRound: true,
+        isQualified: true,
     },
     {
         id: 4,
@@ -58,6 +60,7 @@ const projectsData = [
         liveUrl: 'https://github.com/bhaumik-1910/EcoSphere-ESG-Management-Platform',
         githubUrl: 'https://github.com/bhaumik-1910/EcoSphere-ESG-Management-Platform',
         emoji: '💻',
+        isVirtualRound: true,
     },
     {
         id: 5,
@@ -280,11 +283,25 @@ const Projects = () => {
                                     <span style={{ background: '#28c840' }} />
                                 </div>
 
-                                {project.isPrivate && (
-                                    <div className="project-card__private-badge">
-                                        Private Repo
-                                    </div>
-                                )}
+                                <div className="project-card__badges">
+                                    {project.isPrivate && (
+                                        <div className="project-card__private-badge">
+                                            Private Repo
+                                        </div>
+                                    )}
+
+                                    {project.isVirtualRound && (
+                                        <div className="project-card__virtual-badge">
+                                            Virtual Round
+                                        </div>
+                                    )}
+
+                                    {project.isQualified && (
+                                        <div className="project-card__qualified-badge">
+                                            Qualified
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="project-card__content">
