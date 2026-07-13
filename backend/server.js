@@ -137,7 +137,7 @@ app.post('/api/contact', async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Backend server running at http://localhost:${PORT}`);
+    console.log(`👉 Backend server running at http://localhost:${PORT}`);
 });
 
 // Trigger nodemon reload
