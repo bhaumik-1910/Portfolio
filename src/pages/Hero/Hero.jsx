@@ -110,8 +110,7 @@ const Hero = () => {
             subtitleRef.current,
             '.hero__pill',
             '.hero__btn',
-            '.hero__stat',
-            '.hero__scroll-indicator'
+            '.hero__stat'
         ], { opacity: 0, y: 30 });
 
         // Animation Sequence
@@ -120,8 +119,7 @@ const Hero = () => {
             .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
             .to('.hero__pill', { opacity: 1, y: 0, stagger: 0.05, duration: 0.5 }, '-=0.4')
             .to('.hero__btn', { opacity: 1, y: 0, stagger: 0.1, duration: 0.5 }, '-=0.4')
-            .to('.hero__stat', { opacity: 1, y: 0, stagger: 0.05, duration: 0.5 }, '-=0.4')
-            .to('.hero__scroll-indicator', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3');
+            .to('.hero__stat', { opacity: 1, y: 0, stagger: 0.05, duration: 0.5 }, '-=0.4');
 
         // Orb Parallax Effect
         orbsRef.current.forEach((orb, index) => {
@@ -231,13 +229,6 @@ const Hero = () => {
                         </div>
                     ))}
                 </div>
-            </div>
-
-            <div className="hero__scroll-indicator">
-                <div className="hero__scroll-mouse">
-                    <div className="hero__scroll-wheel" />
-                </div>
-                <span>Scroll Down</span>
             </div>
         </section>
     );

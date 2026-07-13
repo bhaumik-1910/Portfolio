@@ -206,70 +206,6 @@
     letter-spacing: 0.05em;
 }
 
-/* Scroll Indicator */
-.hero__scroll-indicator {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    z-index: 10;
-    animation: fadeInUpCenter 1s ease 1s both;
-    width: auto;
-}
-
-@keyframes fadeInUpCenter {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(-50%, 0);
-    }
-}
-
-.hero__scroll-indicator span {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.hero__scroll-mouse {
-    width: 24px;
-    height: 38px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    padding-top: 6px;
-}
-
-.hero__scroll-wheel {
-    width: 4px;
-    height: 8px;
-    background: var(--accent-blue);
-    border-radius: 2px;
-    animation: scroll-wheel 2s ease-in-out infinite;
-}
-
-@keyframes scroll-wheel {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(12px);
-        opacity: 0;
-    }
-}
-
 /* Responsive */
 @media (max-width: 1200px) {
     .hero__title {
@@ -293,12 +229,8 @@
 
 @media (max-width: 600px) {
     .hero {
-        /* padding: 0px 12px 30px;
-        margin-top: -30px; */
-        padding: 80px 16px 140px;
-        /* Leave space for mouse icon */
+        padding: 80px 16px 60px;
         min-height: 100vh;
-        justify-content: flex-end;
         margin-top: 0;
     }
 
