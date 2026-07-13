@@ -110,27 +110,27 @@ app.post('/api/contact', async (req, res) => {
             `Timestamp: ${timestamp}`;
 
         const emailHtml = `
-            <div style="background-color: #0f172a; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100%;">
-                <div style="max-width: 600px; width: 100%; background: #1e293b; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3); overflow: hidden; margin: 0 auto; text-align: left;">
+            <div style="background-color: #f1f5f9; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100%;">
+                <div style="max-width: 600px; width: 100%; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); overflow: hidden; margin: 0 auto; text-align: left;">
                     
                     <!-- Top Gradient Bar -->
                     <div style="height: 6px; background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);"></div>
                     
                     <!-- Container Header -->
-                    <div style="padding: 32px 32px 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06);">
-                        <div style="display: inline-block; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; margin-bottom: 16px;">
+                    <div style="padding: 32px 32px 20px; text-align: center; border-bottom: 1px solid #f1f5f9;">
+                        <div style="display: inline-block; padding: 12px; background: rgba(59, 130, 246, 0.08); border-radius: 12px; margin-bottom: 16px;">
                             <span style="font-size: 28px; line-height: 1;">✉️</span>
                         </div>
-                        <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.01em;">New Portfolio Enquiry</h2>
-                        <p style="margin: 6px 0 0; font-size: 14px; color: #94a3b8;">You received a message via your personal portfolio website.</p>
+                        <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.01em;">New Portfolio Enquiry</h2>
+                        <p style="margin: 6px 0 0; font-size: 14px; color: #475569;">You received a message via your personal portfolio website.</p>
                     </div>
                     
                     <!-- Info Grid Details -->
-                    <div style="padding: 24px 32px; background: rgba(15, 23, 42, 0.455);">
+                    <div style="padding: 24px 32px; background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
                         <table style="width: 100%; border-collapse: collapse;">
                             <tr>
                                 <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; width: 35%;">Sender Name</td>
-                                <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${name}</td>
+                                <td style="padding: 10px 0; font-size: 15px; color: #0f172a; font-weight: 600;">${name}</td>
                             </tr>
                             <tr>
                                 <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Email Address</td>
@@ -140,27 +140,27 @@ app.post('/api/contact', async (req, res) => {
                             </tr>
                             <tr>
                                 <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Subject</td>
-                                <td style="padding: 10px 0; font-size: 15px; color: #f1f5f9; font-weight: 500;">${subject || 'No Subject'}</td>
+                                <td style="padding: 10px 0; font-size: 15px; color: #0f172a; font-weight: 500;">${subject || 'No Subject'}</td>
                             </tr>
                             <tr>
                                 <td style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Received At</td>
-                                <td style="padding: 10px 0; font-size: 14px; color: #94a3b8;">${timestamp}</td>
+                                <td style="padding: 10px 0; font-size: 14px; color: #475569;">${timestamp}</td>
                             </tr>
                         </table>
                     </div>
-
+ 
                     <!-- Message Content Box -->
-                    <div style="padding: 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); background: #1e293b;">
+                    <div style="padding: 32px; background: #ffffff;">
                         <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Submitted Message</div>
-                        <div style="background-color: #0f172a; padding: 20px; border-left: 4px solid #8b5cf6; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
-                            <p style="margin: 0; font-size: 15px; color: #e2e8f0; line-height: 1.6; white-space: pre-wrap; font-family: inherit;">${message}</p>
+                        <div style="background-color: #f8fafc; padding: 20px; border-left: 4px solid #8b5cf6; border: 1px solid #e2e8f0; border-left-width: 4px; border-radius: 8px;">
+                            <p style="margin: 0; font-size: 15px; color: #334155; line-height: 1.6; white-space: pre-wrap; font-family: inherit;">${message}</p>
                         </div>
                     </div>
-
+ 
                     <!-- Footer -->
-                    <div style="padding: 24px 32px; background: #0f172a; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    <div style="padding: 24px 32px; background: #f8fafc; text-align: center; border-top: 1px solid #e2e8f0;">
                         <p style="margin: 0; font-size: 11px; color: #64748b; line-height: 1.5;">© ${new Date().getFullYear()} Bhaumik Kothiya. All rights reserved.</p>
-                        <p style="margin: 4px 0 0; font-size: 10px; color: #475569;">Received via Portfolio Contact System.</p>
+                        <p style="margin: 4px 0 0; font-size: 10px; color: #94a3b8;">Received via Portfolio Contact System.</p>
                     </div>
                 </div>
             </div>
