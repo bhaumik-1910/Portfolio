@@ -29,6 +29,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('Portfolio Backend Server is running successfully!');
+});
+
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
