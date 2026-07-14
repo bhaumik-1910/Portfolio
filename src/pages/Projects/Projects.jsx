@@ -43,7 +43,7 @@ const projectsData = [
         gradient: 'linear-gradient(135deg, #581c87, #714b67)',
         accentColor: '#d946ef',
         tags: ['React', 'Vite', 'Node.js', 'Express', 'Tailwind CSS'],
-        liveUrl: 'https://github.com/bhaumik-1910/VendorBridge',
+        liveUrl: 'https://vendor-bridge-peach.vercel.app',
         githubUrl: 'https://github.com/bhaumik-1910/VendorBridge',
         emoji: '🏆',
         isVirtualRound: true,
@@ -71,7 +71,7 @@ const projectsData = [
         accentColor: '#3b82f6',
         tags: ['React', 'Node.js', 'MongoDB', 'Maps API', 'GeoLocation'],
         liveUrl: 'https://land-measurement-system-97nl.vercel.app/',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/bhaumik-1910/Land-Measurement-System',
         emoji: '📍',
     },
     {
@@ -83,7 +83,7 @@ const projectsData = [
         accentColor: '#14b8a6',
         tags: ['React', 'Node.js', 'MongoDB', 'AI (MCP)', 'NLP'],
         liveUrl: 'https://neurovia-ai-psi.vercel.app/',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/bhaumik-1910/Neurovia_AI',
         emoji: '🇮🇳',
     },
     {
