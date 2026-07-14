@@ -57,7 +57,7 @@ const projectsData = [
         gradient: 'linear-gradient(135deg, #14532d, #16a34a)',
         accentColor: '#22c55e',
         tags: ['React', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Framer Motion'],
-        liveUrl: 'https://github.com/bhaumik-1910/EcoSphere-ESG-Management-Platform',
+        liveUrl: 'https://eco-sphere-esg-management-platform-brown.vercel.app',
         githubUrl: 'https://github.com/bhaumik-1910/EcoSphere-ESG-Management-Platform',
         emoji: '💻',
         isVirtualRound: true,
