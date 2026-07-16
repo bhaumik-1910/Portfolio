@@ -370,3 +370,131 @@
         min-height: 44px;
     }
 }
+
+/* GitHub Stats Card - Premium Glassmorphism styling */
+.projects__github-stats {
+    margin: 0 auto clamp(30px, 5vw, 50px) auto;
+    max-width: 800px;
+    width: 100%;
+    padding: 0 clamp(0px, 2vw, 15px);
+}
+
+.github-stats__card {
+    width: 100%;
+    padding: clamp(20px, 4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 3vw, 24px);
+    border: 1px solid rgba(59, 130, 246, 0.12) !important;
+    background: linear-gradient(135deg, rgba(8, 15, 32, 0.8), rgba(5, 11, 24, 0.95));
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    transition: transform 0.4s var(--transition-smooth), 
+                border-color 0.4s var(--transition-smooth), 
+                box-shadow 0.4s var(--transition-smooth);
+}
+
+.github-stats__card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.4), var(--accent-purple-light), transparent);
+    opacity: 0.8;
+}
+
+.github-stats__card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(96, 165, 250, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.github-stats__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    z-index: 1;
+}
+
+.github-stats__icon {
+    color: var(--accent-blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.5));
+    animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.github-stats__title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.github-stats__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.github-stats__streak-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform var(--transition-smooth);
+    border-radius: 8px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.github-stats__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96, 165, 250, 0.3) !important;
+    box-shadow: 0 24px 50px rgba(59, 130, 246, 0.15), var(--shadow-glow-purple);
+}
+
+.github-stats__card:hover .github-stats__streak-img {
+    transform: scale(1.015);
+}
+
+/* Responsive adjustments for mobile stats card */
+@media (max-width: 600px) {
+    .github-stats__card {
+        padding: 16px;
+        gap: 16px;
+        backdrop-filter: none !important;
+        background: rgba(8, 15, 32, 0.98);
+        box-shadow: none !important;
+        transform: none !important;
+    }
+    
+    .github-stats__header {
+        gap: 8px;
+    }
+    
+    .github-stats__title {
+        font-size: 0.95rem;
+    }
+
+    .github-stats__card:hover {
+        transform: none !important;
+        border-color: rgba(59, 130, 246, 0.12) !important;
+        box-shadow: none !important;
+    }
+    
+    .github-stats__card:hover .github-stats__streak-img {
+        transform: none !important;
+    }
+}
