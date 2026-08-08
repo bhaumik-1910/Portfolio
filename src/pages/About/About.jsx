@@ -145,7 +145,7 @@ const About = () => {
                         {/* Actions */}
                         <div className="about__actions">
                             <a
-                                href="/Kothiya Bhaumik.pdf"
+                                href="/Bhaumik_Kothiya.pdf"
                                 className="btn btn-primary"
                                 download="Kothiya_Bhaumik_Resume.pdf"
                                 id="about-download-resume-btn"
