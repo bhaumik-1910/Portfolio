@@ -170,13 +170,6 @@ const GitHubStatsCard = () => {
                     <span className="gh-stats-card__meta-value">{statsData.firstActivity}</span>
                 </div>
             </div>
-
-            {/* Footer credit */}
-            <div className="gh-stats-card__footer">
-                <span>github-readme-stats-card</span>
-                <span>·</span>
-                <span>by Vatsalladani</span>
-            </div>
         </div>
     );
 };
