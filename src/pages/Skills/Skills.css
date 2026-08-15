@@ -305,102 +305,22 @@
     }
 }
 
-/* GitHub Streak Stats - Premium Glassmorphism Widget */
+/* GitHub Stats Card Container */
 .skills__github-stats {
     margin: 40px auto 0 auto;
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     position: relative;
     z-index: 10;
 }
 
-.github-stats__card {
-    width: 100%;
-    padding: clamp(20px, 4vw, 32px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(16px, 3vw, 24px);
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    background: rgba(10, 18, 40, 0.4) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: var(--radius-lg);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s var(--transition-smooth),
-        border-color 0.4s var(--transition-smooth),
-        background 0.4s var(--transition-smooth);
-}
-
-.github-stats__card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.3), var(--accent-purple-light), transparent);
-}
-
-.github-stats__card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(96, 165, 250, 0.04) 0%, transparent 60%);
-    pointer-events: none;
-}
-
-.github-stats__header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    z-index: 2;
-}
-
-.github-stats__icon {
-    color: var(--accent-blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4));
-}
-
-.github-stats__title {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-}
-
-.github-stats__content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    overflow: hidden;
-    z-index: 2;
-}
-
-.github-stats__streak-img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    transition: transform var(--transition-smooth);
-    border-radius: 8px;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
-}
-
-.github-stats__card:hover {
+/* Disable glass-card hover effects on this container */
+.skills__github-stats:hover {
     transform: none !important;
-    border-color: rgba(255, 255, 255, 0.08) !important;
-    background: rgba(10, 18, 40, 0.4) !important;
     box-shadow: none !important;
 }
 
-/* Responsive adjustments for mobile stats card */
+/* Responsive adjustments */
 @media (max-width: 900px) {
     .skills__github-stats {
         margin-top: 30px;
@@ -410,33 +330,5 @@
 @media (max-width: 600px) {
     .skills__github-stats {
         margin-top: 24px;
-    }
-
-    .github-stats__card {
-        padding: 16px;
-        gap: 16px;
-        backdrop-filter: none !important;
-        background: rgba(10, 18, 40, 0.95) !important;
-        box-shadow: none !important;
-        transform: none !important;
-    }
-
-    .github-stats__header {
-        gap: 8px;
-    }
-
-    .github-stats__title {
-        font-size: 0.95rem;
-    }
-
-    .github-stats__card:hover {
-        transform: none !important;
-        border-color: rgba(255, 255, 255, 0.08) !important;
-        background: rgba(10, 18, 40, 0.95) !important;
-        box-shadow: none !important;
-    }
-
-    .github-stats__card:hover .github-stats__streak-img {
-        transform: none !important;
     }
 }

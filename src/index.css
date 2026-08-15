@@ -33,8 +33,8 @@
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
   --shadow-card-hover: 0 20px 60px rgba(59, 130, 246, 0.2);
 
-  --font-primary: 'Space Grotesk', 'Inter', sans-serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-primary: 'Calibri', 'Inter', 'Space Grotesk', sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', monospace;
 
   --transition-fast: 0.2s ease;
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);

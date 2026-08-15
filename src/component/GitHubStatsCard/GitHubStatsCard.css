@@ -1,0 +1,513 @@
+/* ============================================
+   GitHub Stats Card - Matching Reference Design
+   Dark themed card with timeline, stats & metadata
+   Font: Calibri (matching full project)
+   ============================================ */
+
+.gh-stats-card {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    background: linear-gradient(165deg, #0d1525 0%, #0a1120 40%, #0c1428 100%);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 14px;
+    padding: clamp(18px, 3vw, 28px) clamp(18px, 3.5vw, 36px);
+    overflow: hidden;
+    font-family: 'Calibri', 'Inter', 'Space Grotesk', sans-serif;
+}
+
+/* Top shine accent line */
+.gh-stats-card__shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(96, 165, 250, 0.3) 30%,
+            rgba(139, 92, 246, 0.4) 50%,
+            rgba(96, 165, 250, 0.3) 70%,
+            transparent 100%);
+}
+
+/* ─── HEADER ─── */
+.gh-stats-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.gh-stats-card__header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.gh-stats-card__username {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    font-weight: 700;
+    color: #f0f4ff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.gh-stats-card__subtitle {
+    font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+    color: #64748b;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.gh-stats-card__badge {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
+    color: #475569;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+/* ─── DIVIDER ─── */
+.gh-stats-card__divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.06) 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.06) 100%);
+    margin-bottom: 20px;
+}
+
+/* ─── TIMELINE ─── */
+.gh-stats-card__timeline {
+    position: relative;
+    width: 100%;
+    height: 58px;
+    margin-bottom: 22px;
+    padding: 0 10px;
+}
+
+.gh-stats-card__timeline-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.gh-stats-card__timeline-line {
+    position: absolute;
+    top: 32px;
+    left: 4%;
+    right: 4%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1px;
+}
+
+.gh-stats-card__timeline-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-50%);
+    gap: 4px;
+}
+
+/* Timeline marker shapes */
+.gh-stats-card__timeline-marker {
+    height: 14px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.gh-stats-card__timeline-dash {
+    width: 14px;
+    height: 3px;
+    background: #3b82f6;
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+.gh-stats-card__timeline-dots {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+}
+
+.gh-stats-card__timeline-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #60a5fa;
+}
+
+.gh-stats-card__timeline-bar {
+    width: 12px;
+    height: 14px;
+    background: linear-gradient(to top, #3b82f6, #60a5fa);
+    border-radius: 3px 3px 1px 1px;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.gh-stats-card__timeline-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #60a5fa;
+    border: 2px solid #0d1525;
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.gh-stats-card__timeline-dot--now {
+    background: #10b981;
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.4),
+        0 0 8px rgba(16, 185, 129, 0.5);
+    animation: pulse-now 2s infinite ease-in-out;
+}
+
+@keyframes pulse-now {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.4),
+            0 0 8px rgba(16, 185, 129, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2),
+            0 0 16px rgba(16, 185, 129, 0.5);
+    }
+}
+
+.gh-stats-card__timeline-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #60a5fa;
+    letter-spacing: 0.02em;
+    margin-top: 1px;
+}
+
+.gh-stats-card__timeline-label--now {
+    color: #10b981;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+/* ─── STATS ROW ─── */
+.gh-stats-card__stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 18px;
+    padding: 0 4px;
+}
+
+.gh-stats-card__stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 6px;
+}
+
+.gh-stats-card__stat-divider {
+    width: 1px;
+    height: 85px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.08) 30%,
+            rgba(255, 255, 255, 0.08) 70%,
+            transparent 100%);
+    flex-shrink: 0;
+}
+
+.gh-stats-card__stat-number {
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.gh-stats-card__stat-number--contributions {
+    color: #e2e8f0;
+}
+
+.gh-stats-card__stat-number--longest {
+    color: #a78bfa;
+    font-style: italic;
+}
+
+.gh-stats-card__stat-label {
+    font-size: clamp(0.52rem, 0.9vw, 0.65rem);
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.gh-stats-card__stat-sub {
+    font-size: clamp(0.52rem, 0.85vw, 0.62rem);
+    color: #475569;
+    font-weight: 400;
+}
+
+.gh-stats-card__stat-range {
+    font-size: clamp(0.52rem, 0.85vw, 0.62rem);
+    color: #818cf8;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* ─── STREAK RING ─── */
+.gh-stats-card__stat--streak {
+    padding-top: 0;
+}
+
+.gh-stats-card__streak-ring {
+    position: relative;
+    width: clamp(56px, 8vw, 68px);
+    height: clamp(56px, 8vw, 68px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+.gh-stats-card__streak-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.gh-stats-card__streak-count {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 800;
+    color: #f0f4ff;
+    z-index: 2;
+    line-height: 1;
+}
+
+.gh-stats-card__streak-fire {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    z-index: 3;
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.6));
+    animation: fire-float 2s ease-in-out infinite;
+}
+
+@keyframes fire-float {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-3px);
+    }
+}
+
+/* ─── BOTTOM META ROW ─── */
+.gh-stats-card__bottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 12px 0 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 10px;
+}
+
+.gh-stats-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.gh-stats-card__meta-label {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+    font-weight: 600;
+    color: #475569;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.gh-stats-card__meta-value {
+    font-size: clamp(0.7rem, 1.1vw, 0.8rem);
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.gh-stats-card__meta-bold {
+    font-weight: 700;
+    color: #f0f4ff;
+}
+
+.gh-stats-card__meta-highlight {
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* ─── FOOTER CREDIT ─── */
+.gh-stats-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 8px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: clamp(0.5rem, 0.75vw, 0.6rem);
+    color: #334155;
+    letter-spacing: 0.02em;
+}
+
+/* ─── HOVER EFFECT ─── */
+.gh-stats-card:hover {
+    border-color: rgba(96, 165, 250, 0.2);
+}
+
+.gh-stats-card:hover .gh-stats-card__shine {
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(96, 165, 250, 0.4) 30%,
+            rgba(139, 92, 246, 0.5) 50%,
+            rgba(96, 165, 250, 0.4) 70%,
+            transparent 100%);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .gh-stats-card {
+        padding: 16px 14px;
+        border-radius: 12px;
+    }
+
+    .gh-stats-card__timeline {
+        height: 50px;
+        margin-bottom: 18px;
+    }
+
+    .gh-stats-card__timeline-marker {
+        height: 12px;
+    }
+
+    .gh-stats-card__timeline-bar {
+        width: 10px;
+        height: 11px;
+    }
+
+    .gh-stats-card__timeline-dash {
+        width: 10px;
+        height: 2px;
+    }
+
+    .gh-stats-card__timeline-dots span {
+        width: 4px;
+        height: 4px;
+    }
+
+    .gh-stats-card__timeline-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .gh-stats-card__timeline-label {
+        font-size: 9px;
+    }
+
+    .gh-stats-card__stats {
+        margin-bottom: 14px;
+    }
+
+    .gh-stats-card__stat-divider {
+        height: 70px;
+    }
+
+    .gh-stats-card__bottom {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .gh-stats-card__meta {
+        min-width: calc(50% - 10px);
+    }
+
+    .gh-stats-card__meta:last-child {
+        min-width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .gh-stats-card {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .gh-stats-card__header {
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    .gh-stats-card__badge {
+        align-self: flex-start;
+    }
+
+    .gh-stats-card__timeline {
+        height: 46px;
+        margin-bottom: 14px;
+    }
+
+    .gh-stats-card__stats {
+        gap: 0;
+        padding: 0;
+    }
+
+    .gh-stats-card__stat {
+        padding: 6px 3px;
+    }
+
+    .gh-stats-card__stat-divider {
+        height: 60px;
+    }
+
+    .gh-stats-card__streak-ring {
+        width: 48px;
+        height: 48px;
+    }
+
+    .gh-stats-card__bottom {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .gh-stats-card__meta {
+        min-width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .gh-stats-card__footer {
+        justify-content: center;
+    }
+}
