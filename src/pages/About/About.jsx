@@ -1,11 +1,6 @@
-import { useRef, memo } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import './About.css';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const highlights = [
     { icon: '🚀', label: 'Full Stack', desc: 'End-to-end development' },
@@ -15,66 +10,18 @@ const highlights = [
 ];
 
 const About = () => {
-    const sectionRef = useRef(null);
-    const imageRef = useRef(null);
-    const contentRef = useRef(null);
-
-    useGSAP(() => {
-        // Image Side Animation
-        gsap.from(imageRef.current, {
-            opacity: 0,
-            x: -50,
-            duration: 1.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: imageRef.current,
-                start: 'top 80%',
-            }
-        });
-
-        // Rings continuous rotation
-        gsap.to('.about__ring', {
-            rotation: 360,
-            duration: 20,
-            repeat: -1,
-            ease: 'none'
-        });
-
-        // Content Side Reveal
-        const contentElements = contentRef.current.children;
-        gsap.from(contentElements, {
-            opacity: 0,
-            x: 50,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: contentRef.current,
-                start: 'top 80%',
-            }
-        });
-
-        // Highlights Stagger
-        gsap.from('.about__highlight-card', {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'back.out(1.7)',
-            scrollTrigger: {
-                trigger: '.about__highlights',
-                start: 'top 90%',
-            }
-        });
-
-    }, { scope: sectionRef });
-
     return (
-        <section className="section about" id="about" ref={sectionRef}>
+        <section className="section about" id="about">
             <div className="section-inner">
                 <div className="about__grid">
                     {/* Left - Image */}
-                    <div className="about__image-col" ref={imageRef}>
+                    <motion.div
+                        className="about__image-col"
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
+                    >
                         <div className="about__image-wrapper">
                             <div className="about__ring about__ring--1" />
                             <div className="about__ring about__ring--2" />
@@ -87,11 +34,11 @@ const About = () => {
                                         <ellipse cx="100" cy="175" rx="70" ry="45" fill="url(#avatarGrad2)" opacity="0.7" />
                                         <defs>
                                             <radialGradient id="avatarGrad1" cx="50%" cy="50%" r="50%">
-                                                <stop offset="0%" stopColor="#60a5fa" />
-                                                <stop offset="100%" stopColor="#8b5cf6" />
+                                                <stop offset="0%" stopColor="#3b82f6" />
+                                                <stop offset="100%" stopColor="#7c3aed" />
                                             </radialGradient>
                                             <radialGradient id="avatarGrad2" cx="50%" cy="50%" r="50%">
-                                                <stop offset="0%" stopColor="#3b82f6" />
+                                                <stop offset="0%" stopColor="#2563eb" />
                                                 <stop offset="100%" stopColor="#6d28d9" />
                                             </radialGradient>
                                         </defs>
@@ -100,19 +47,31 @@ const About = () => {
                                 </div>
                             </div>
 
-                            <div className="about__badge about__badge--1">
+                            <motion.div
+                                className="about__badge about__badge--1"
+                                whileHover={{ scale: 1.05 }}
+                            >
                                 <span>⚡</span>
                                 <span>1.5+ Years Exp</span>
-                            </div>
-                            <div className="about__badge about__badge--2">
+                            </motion.div>
+                            <motion.div
+                                className="about__badge about__badge--2"
+                                whileHover={{ scale: 1.05 }}
+                            >
                                 <span>🏆</span>
                                 <span>2+ Projects</span>
-                            </div>
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right - Content */}
-                    <div className="about__content" ref={contentRef}>
+                    <motion.div
+                        className="about__content"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
+                    >
                         <div className="about__header-reveal">
                             <span className="section-label">About Me</span>
                             <h2 className="section-title">
@@ -129,26 +88,33 @@ const About = () => {
                             Specializing in the <strong>MERN stack</strong>, I have successfully delivered diverse projects ranging from enterprise-level documentation portals to real-time collaborative tools. My expertise extends beyond standard web development to include <strong>AI/ML integration</strong>, cloud services, and automated publishing platforms. I am constantly exploring new technologies to stay at the forefront of modern web engineering.
                         </p>
 
-                        {/* Highlights */}
+                        {/* Highlights - Solid single entrance with pure spring hover */}
                         <div className="about__highlights">
                             {highlights.map((h) => (
-                                <div key={h.label} className="about__highlight-card glass-card">
+                                <motion.div
+                                    key={h.label}
+                                    className="about__highlight-card glass-card"
+                                    whileHover={{ y: -4, scale: 1.02 }}
+                                    transition={{ type: 'spring', stiffness: 300 }}
+                                >
                                     <span className="about__highlight-icon">{h.icon}</span>
                                     <div>
                                         <div className="about__highlight-label">{h.label}</div>
                                         <div className="about__highlight-desc">{h.desc}</div>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
                         {/* Actions */}
                         <div className="about__actions">
-                            <a
+                            <motion.a
                                 href="/Bhaumik_Kothiya.pdf"
                                 className="btn btn-primary"
                                 download="Kothiya_Bhaumik_Resume.pdf"
                                 id="about-download-resume-btn"
+                                whileHover={{ scale: 1.03, y: -2 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -156,16 +122,18 @@ const About = () => {
                                     <line x1="12" y1="15" x2="12" y2="3" />
                                 </svg>
                                 Download Resume
-                            </a>
-                            <button
+                            </motion.a>
+                            <motion.button
                                 className="btn btn-outline"
                                 onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
                                 id="about-contact-btn"
+                                whileHover={{ scale: 1.03, y: -2 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 Let&apos;s Talk
-                            </button>
+                            </motion.button>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

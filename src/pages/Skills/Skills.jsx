@@ -1,12 +1,7 @@
-import { useRef, memo, useState } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import GitHubStatsCard from '../../component/GitHubStatsCard/GitHubStatsCard';
 import './Skills.css';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const skillCategories = [
     {
@@ -18,12 +13,6 @@ const skillCategories = [
             { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
             { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
             { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-            // { name: 'ASP.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
-            // { name: 'SQL Server', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg' },
-            // { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-            // { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
-            // { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-            // { name: '.NET Core', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg' },
         ],
     },
     {
@@ -35,7 +24,6 @@ const skillCategories = [
             { name: 'React.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
             { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
             { name: 'Material UI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
-            // { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
             { name: 'Tailwind', icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
             { name: 'Shadcn/UI', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/shadcnui.svg' },
             { name: 'Motion UI', icon: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/framer.svg' },
@@ -50,21 +38,16 @@ const skillCategories = [
         title: 'Mobile',
         skills: [
             { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
-            // { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-            // { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg' },
-            // { name: 'iOS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg' },
         ],
     },
     {
         id: 'devops',
         title: 'DevOps',
         skills: [
-            // { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
             { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
             { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
             { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
             { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
-            // { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
         ],
     },
     {
@@ -76,8 +59,6 @@ const skillCategories = [
             { name: 'Postman', icon: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
             { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
             { name: 'Canva', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg' }
-            // { name: 'Redis', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
-            // { name: 'Socket.io', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg' },
         ],
     },
 ];
@@ -88,12 +69,12 @@ const techIcons = [
     { name: 'Sass', color: '#cc6699', symbol: 'S' },
     { name: 'JavaScript', color: '#f7df1e', symbol: 'JS' },
     { name: 'React', color: '#61dafb', symbol: '⚛' },
-    { name: 'Next.js', color: '#ffffff', symbol: '▲' },
+    { name: 'Next.js', color: '#0f172a', symbol: '▲' },
     { name: 'TypeScript', color: '#3178c6', symbol: 'TS' },
     { name: 'Tailwind CSS', color: '#06b6d4', symbol: '💨' },
     { name: 'Bootstrap', color: '#7952b3', symbol: 'B' },
     { name: 'MUI', color: '#007fff', symbol: 'M' },
-    { name: 'Shadcn/UI', color: '#ffffff', symbol: 'S' },
+    { name: 'Shadcn/UI', color: '#0f172a', symbol: 'S' },
     { name: 'Motion UI', color: '#ff0055', symbol: 'M' },
     { name: 'Node.js', color: '#68a063', symbol: '⬡' },
     { name: 'MongoDB', color: '#4db33d', symbol: '◉' },
@@ -102,85 +83,20 @@ const techIcons = [
 const marqueeIcons = [...techIcons, ...techIcons];
 
 const Skills = () => {
-    const sectionRef = useRef(null);
-    const contentRef = useRef(null);
     const [activeTab, setActiveTab] = useState('backend');
-
     const activeSkills = skillCategories.find(cat => cat.id === activeTab)?.skills || [];
 
-    useGSAP(() => {
-        // Header Reveal
-        gsap.from('.skills__header > *', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.skills__header',
-                start: 'top 85%',
-            }
-        });
-
-        // Marquee Reveal
-        gsap.from('.skills__marquee', {
-            opacity: 0,
-            scale: 0.95,
-            duration: 1.2,
-            ease: 'expo.out',
-            scrollTrigger: {
-                trigger: '.skills__marquee',
-                start: 'top 90%',
-            }
-        });
-
-        // Main Layout Reveal
-        gsap.from('.skills__layout', {
-            opacity: 0,
-            y: 50,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.skills__layout',
-                start: 'top 80%',
-            }
-        });
-
-        // GitHub stats Reveal
-        gsap.from('.skills__github-stats', {
-            opacity: 0,
-            y: 40,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.skills__github-stats',
-                start: 'top 85%',
-            }
-        });
-    }, { scope: sectionRef });
-
-    // Handle tab change with animation
-    const handleTabChange = (id) => {
-        if (id === activeTab) return;
-
-        gsap.to(contentRef.current, {
-            opacity: 0,
-            x: -20,
-            duration: 0.3,
-            onComplete: () => {
-                setActiveTab(id);
-                gsap.fromTo(contentRef.current,
-                    { opacity: 0, x: 20 },
-                    { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
-                );
-            }
-        });
-    };
-
     return (
-        <section className="section skills" id="skills" ref={sectionRef}>
+        <section className="section skills" id="skills">
             <div className="section-inner">
-                <div className="skills__header">
+                {/* Header */}
+                <motion.div
+                    className="skills__header"
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <span className="section-label">Expertise Deck</span>
                     <h2 className="section-title">
                         My Technical <span className="gradient-text">Stack</span>
@@ -188,29 +104,51 @@ const Skills = () => {
                     <p className="section-subtitle">
                         A curated selection of technologies and tools I use to build industrial-grade applications.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="skills__marquee">
+                {/* Marquee */}
+                <motion.div
+                    className="skills__marquee"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <div className="skills__marquee-track">
                         {marqueeIcons.map((tech, idx) => (
-                            <div key={`${tech.name}-${idx}`} className="skills__tech-icon glass-card" title={tech.name}>
+                            <motion.div
+                                key={`${tech.name}-${idx}`}
+                                className="skills__tech-icon glass-card"
+                                title={tech.name}
+                                whileHover={{ y: -4, scale: 1.05 }}
+                                transition={{ type: 'spring', stiffness: 400 }}
+                            >
                                 <span className="skills__tech-symbol" style={{ color: tech.color }}>
                                     {tech.symbol}
                                 </span>
                                 <span className="skills__tech-name">{tech.name}</span>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="skills__layout glass-card">
+                {/* Main Layout */}
+                <motion.div
+                    className="skills__layout glass-card"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     {/* Sidebar Tabs */}
                     <div className="skills__sidebar">
                         {skillCategories.map((cat) => (
-                            <button
+                            <motion.button
                                 key={cat.id}
                                 className={`skills__tab ${activeTab === cat.id ? 'active' : ''}`}
-                                onClick={() => handleTabChange(cat.id)}
+                                onClick={() => setActiveTab(cat.id)}
+                                whileHover={{ x: 3 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <div className="skills__tab-indicator">
                                     {activeTab === cat.id ? (
@@ -223,37 +161,56 @@ const Skills = () => {
                                     )}
                                 </div>
                                 <span className="skills__tab-label">{cat.title}</span>
-                            </button>
+                            </motion.button>
                         ))}
                     </div>
 
-                    {/* Skill Logos Grid */}
-                    <div className="skills__content" ref={contentRef}>
-                        <div className="skills__logo-grid">
-                            {/* Force minimum 8 slots (4x2 grid) for every category to look consistent like Backend */}
-                            {[...Array(Math.max(8, Math.ceil(activeSkills.length / 4) * 4))].map((_, idx) => {
-                                const skill = activeSkills[idx];
-                                return (
-                                    <div key={skill?.name || `empty-${idx}`} className="skills__logo-item">
-                                        {skill && (
-                                            <div className="skills__logo-wrapper">
-                                                <img src={skill.icon} alt={skill.name} className="skills__logo-img" />
-                                                <span className="skills__logo-name">{skill.name}</span>
-                                            </div>
-                                        )}
-                                        <div className="grid-line horizontal" />
-                                        <div className="grid-line vertical" />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                    {/* Skill Logos Grid with AnimatePresence */}
+                    <div className="skills__content">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeTab}
+                                className="skills__logo-grid"
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -15 }}
+                                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                            >
+                                {[...Array(Math.max(8, Math.ceil(activeSkills.length / 4) * 4))].map((_, idx) => {
+                                    const skill = activeSkills[idx];
+                                    return (
+                                        <motion.div
+                                            key={skill?.name || `empty-${idx}`}
+                                            className="skills__logo-item"
+                                            whileHover={{ scale: 1.04 }}
+                                            transition={{ type: 'spring', stiffness: 300 }}
+                                        >
+                                            {skill && (
+                                                <div className="skills__logo-wrapper">
+                                                    <img src={skill.icon} alt={skill.name} className="skills__logo-img" />
+                                                    <span className="skills__logo-name">{skill.name}</span>
+                                                </div>
+                                            )}
+                                            <div className="grid-line horizontal" />
+                                            <div className="grid-line vertical" />
+                                        </motion.div>
+                                    );
+                                })}
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* GitHub Stats Card */}
-                <div className="skills__github-stats">
+                <motion.div
+                    className="skills__github-stats"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <GitHubStatsCard />
-                </div>
+                </motion.div>
             </div>
         </section>
     );

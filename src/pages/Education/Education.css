@@ -1,5 +1,5 @@
 .education {
-    background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.02) 50%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(5, 150, 105, 0.015) 50%, transparent);
     margin-top: clamp(-30px, -5vw, -50px);
     padding: clamp(30px, 5vw, 40px) clamp(1rem, 3vw, 2rem) !important;
 }
@@ -28,20 +28,16 @@
     flex-direction: column;
     gap: clamp(16px, 2.5vw, 24px);
     height: 100%;
-    justify-content: space-between; /* Ensures the icon is at top and content/accent at bottom */
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    will-change: transform, opacity;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
 }
 
 .education__card:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .education__card-header {
@@ -78,7 +74,7 @@
 .education__year {
     font-family: var(--font-mono);
     font-size: clamp(11px, 1.2vw, 13px);
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .education__status {
@@ -120,8 +116,8 @@
 
 .education__location-tag {
     font-size: clamp(10px, 1.1vw, 12px);
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    background: rgba(37, 99, 235, 0.04);
     padding: clamp(2px, 0.3vw, 3px) clamp(8px, 1.2vw, 10px);
     border-radius: var(--radius-full);
     white-space: nowrap;
@@ -155,8 +151,8 @@
 
 .education__highlight-tag {
     padding: clamp(4px, 0.7vw, 6px) clamp(10px, 1.5vw, 14px);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(248, 250, 252, 0.5);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     border-radius: var(--radius-sm);
     font-size: clamp(10px, 1.1vw, 12px);
     color: var(--text-secondary);
@@ -164,8 +160,8 @@
 }
 
 .education__card:hover .education__highlight-tag {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(37, 99, 235, 0.04);
+    border-color: rgba(37, 99, 235, 0.1);
 }
 
 .education__accent-line {

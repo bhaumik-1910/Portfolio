@@ -1,7 +1,7 @@
-import { useEffect, useRef, memo } from 'react';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import './Certifications.css';
 
-//Certifications data array with enhanced styling properties
 const certificationsData = [
     {
         id: 1,
@@ -9,7 +9,7 @@ const certificationsData = [
         issuer: "Vasant Software Solutions - Rajkot",
         date: "2024",
         link: "/Internship.pdf",
-        color: "#3b82f6",
+        color: "#2563eb",
         icon: "🎓"
     },
     {
@@ -18,7 +18,7 @@ const certificationsData = [
         issuer: "LJ University - Coursera",
         date: "2025",
         link: "/Git&Github.pdf",
-        color: "#4285f4",
+        color: "#0891b2",
         icon: "🛠️"
     },
     {
@@ -27,7 +27,7 @@ const certificationsData = [
         issuer: "LJ University - Coursera",
         date: "2026",
         link: "/Generative AI.pdf",
-        color: "#0056D2",
+        color: "#7c3aed",
         icon: "🤖"
     },
     {
@@ -36,37 +36,46 @@ const certificationsData = [
         issuer: "LJ University",
         date: "2026",
         link: "/Innovation.pdf",
-        color: "#F59E0B",
+        color: "#f59e0b",
         icon: "🏆"
     },
 ];
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.12,
+        },
+    },
+};
+
+const cardVariants = {
+    hidden: { opacity: 0, y: 35, scale: 0.95 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.6,
+            ease: [0.25, 0.1, 0.25, 1.0],
+        },
+    },
+};
+
 const Certifications = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
-
     return (
-        <section className="section certifications" id="certifications" ref={sectionRef}>
+        <section className="section certifications" id="certifications">
             <div className="section-inner">
                 {/* Header */}
-                <div className="certifications__header animate-on-scroll">
+                <motion.div
+                    className="certifications__header"
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <span className="section-label">Achievements</span>
                     <h2 className="section-title">
                         Certifications & <span className="gradient-text">Awards</span>
@@ -74,26 +83,36 @@ const Certifications = () => {
                     <p className="section-subtitle">
                         A collection of professional certifications and academic honors that validate my expertise.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Certifications Grid */}
-                <div className="certifications__grid">
-                    {certificationsData.map((cert, idx) => (
-                        <div
+                <motion.div
+                    className="certifications__grid"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.15 }}
+                >
+                    {certificationsData.map((cert) => (
+                        <motion.div
                             key={cert.id}
-                            className={`certification__card glass-card animate-on-scroll animate-delay-${idx + 1}`}
+                            className="certification__card glass-card"
+                            variants={cardVariants}
+                            whileHover={{ y: -6, transition: { duration: 0.25 } }}
                         >
                             <div className="certification__icon-wrapper">
-                                <div
+                                <motion.div
                                     className="certification__icon"
                                     style={{
-                                        background: `${cert.color}20`,
+                                        background: `${cert.color}15`,
                                         color: cert.color,
-                                        borderColor: `${cert.color}40`
+                                        borderColor: `${cert.color}30`
                                     }}
+                                    whileHover={{ rotateY: 180 }}
+                                    transition={{ duration: 0.4 }}
                                 >
                                     {cert.icon}
-                                </div>
+                                </motion.div>
                                 <div className="certification__badge">Official</div>
                             </div>
 
@@ -102,12 +121,13 @@ const Certifications = () => {
                                 <p className="certification__issuer">{cert.issuer}</p>
                                 <div className="certification__footer">
                                     <span className="certification__date">{cert.date}</span>
-                                    <a
+                                    <motion.a
                                         href={cert.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="certification__link"
                                         style={{ color: cert.color }}
+                                        whileHover={{ x: 4 }}
                                     >
                                         View Credential
                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -115,7 +135,7 @@ const Certifications = () => {
                                             <polyline points="15 3 21 3 21 9" />
                                             <line x1="10" y1="14" x2="21" y2="3" />
                                         </svg>
-                                    </a>
+                                    </motion.a>
                                 </div>
                             </div>
 
@@ -124,9 +144,9 @@ const Certifications = () => {
                                 className="certification__accent"
                                 style={{ background: `radial-gradient(circle at top right, ${cert.color}15, transparent)` }}
                             />
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

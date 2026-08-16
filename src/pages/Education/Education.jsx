@@ -1,11 +1,6 @@
-import { useRef, memo } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import './Education.css';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const educationData = [
     {
@@ -13,8 +8,8 @@ const educationData = [
         degree: "Master of Science in Information Technology",
         institution: "LJ University",
         location: "Ahmedabad, Gujarat",
-        year: "2025 – 2027",
-        status: "Pursuing",
+        year: "2025 — 2027",
+        status: "PURSUING",
         description: "Focusing on advanced computing paradigms, specializing in Cloud Architecture, AI systems, and Enterprise IT Strategy.",
         highlights: [
             "Cloud Computing",
@@ -30,8 +25,8 @@ const educationData = [
         degree: "Bachelor of Science in Information Technology",
         institution: "Saurashtra University",
         location: "Rajkot, Gujarat",
-        year: "2022 – 2025",
-        status: "Completed",
+        year: "2022 — 2025",
+        status: "COMPLETED",
         description: "Specialized in full-stack development and database management, with a final year project focused on scalable web applications.",
         highlights: [
             "8.5 CGPA (Overall)",
@@ -39,7 +34,7 @@ const educationData = [
             "Database Systems",
             "Software Engineering"
         ],
-        color: '#3b82f6',
+        color: '#2563eb',
         icon: '🎓'
     },
     {
@@ -47,9 +42,9 @@ const educationData = [
         degree: "Higher Secondary Education (HSC)",
         institution: "Shree Vidhya Aarambh",
         location: "Panchvada, Gujarat",
-        year: "2020 – 2022",
-        status: "Completed",
-        stream: "Commerce Stream",
+        year: "2020 — 2022",
+        status: "COMPLETED",
+        stream: "COMMERCE STREAM",
         description: "Academic focus on business logic, accountancy, and computer applications, building a strong analytical foundation.",
         highlights: [
             "79.14%",
@@ -57,7 +52,7 @@ const educationData = [
             "Accountancy",
             "Computer Applications"
         ],
-        color: '#8b5cf6',
+        color: '#7c3aed',
         icon: '🏫'
     },
     {
@@ -65,8 +60,8 @@ const educationData = [
         degree: "Secondary School Education (SSC)",
         institution: "Shree M.K.M Vasoya Patel Vidhya Mandir",
         location: "Dhoraji, Gujarat",
-        year: "2019 – 2020",
-        status: "Completed",
+        year: "2019 — 2020",
+        status: "COMPLETED",
         description: "Foundational education with a focus on Mathematics and Science, achieving strong academic performance in core subjects.",
         highlights: [
             "69.00%",
@@ -74,110 +69,67 @@ const educationData = [
             "Science",
             "Language Studies"
         ],
-        color: '#10b981',
+        color: '#059669',
         icon: '📖'
     }
 ];
 
 const Education = () => {
-    const sectionRef = useRef(null);
-    const gridRef = useRef(null);
-
-    useGSAP(() => {
-        // Header Reveal
-        gsap.from('.education__header > *', {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '.education__header',
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            }
-        });
-
-        // Cards reveal - individual triggers for smoother scrolling connection
-        const cardElements = gsap.utils.toArray('.education__card');
-        cardElements.forEach((card, idx) => {
-            gsap.fromTo(card,
-                {
-                    opacity: 0,
-                    y: 80,
-                    scale: 0.95
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 92%',
-                        toggleActions: 'play none none reverse'
-                    }
-                }
-            );
-        });
-
-        // Hover effect for accent line
-        const cards = gsap.utils.toArray('.education__card');
-        cards.forEach((card) => {
-            const line = card.querySelector('.education__accent-line');
-            card.addEventListener('mouseenter', () => {
-                gsap.to(line, { scaleX: 1.1, duration: 0.4, ease: 'power2.out', opacity: 1 });
-                gsap.to(card, { y: -5, duration: 0.3, ease: 'power2.out' });
-            });
-            card.addEventListener('mouseleave', () => {
-                gsap.to(line, { scaleX: 1, duration: 0.4, ease: 'power2.out', opacity: 0.5 });
-                gsap.to(card, { y: 0, duration: 0.3, ease: 'power2.out' });
-            });
-        });
-
-    }, { scope: sectionRef });
-
     return (
-        <section className="section education" id="education" ref={sectionRef}>
+        <section className="section education" id="education">
             <div className="section-inner">
                 {/* Header */}
-                <div className="education__header">
+                <motion.div
+                    className="education__header"
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <span className="section-label">Academic Background</span>
                     <h2 className="section-title">
-                        My <span className="gradient-text">Education</span>
+                        Education & <span className="gradient-text">Qualifications</span>
                     </h2>
                     <p className="section-subtitle">
-                        A journey of continuous learning and academic excellence.
+                        My formal academic background in Information Technology and Computer Science.
                     </p>
-                </div>
+                </motion.div>
 
-                {/* Education Grid */}
-                <div className="education__grid" ref={gridRef}>
-                    {educationData.map((edu) => (
-                        <div
+                {/* Grid */}
+                <div className="education__grid">
+                    {educationData.map((edu, idx) => (
+                        <motion.div
                             key={edu.id}
                             className="education__card glass-card"
+                            id={`education-${edu.id}`}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{
+                                duration: 0.55,
+                                delay: (idx % 2) * 0.1,
+                                ease: [0.25, 0.1, 0.25, 1.0],
+                            }}
+                            whileHover={{ y: -5, transition: { duration: 0.2 } }}
                         >
                             <div className="education__card-header">
                                 <div
                                     className="education__icon"
                                     style={{
-                                        background: `${edu.color}20`,
-                                        color: edu.color,
-                                        borderColor: `${edu.color}40`
+                                        background: `${edu.color}15`,
+                                        borderColor: `${edu.color}30`,
                                     }}
                                 >
-                                    {edu.icon}
+                                    <span>{edu.icon}</span>
                                 </div>
                                 <div className="education__meta">
                                     <span className="education__year">{edu.year}</span>
                                     <span
                                         className="education__status"
                                         style={{
-                                            background: `${edu.color}15`,
                                             color: edu.color,
-                                            borderColor: `${edu.color}30`
+                                            background: `${edu.color}15`,
+                                            borderColor: `${edu.color}30`,
                                         }}
                                     >
                                         {edu.status}
@@ -188,29 +140,39 @@ const Education = () => {
                             <div className="education__content">
                                 <h3 className="education__degree">{edu.degree}</h3>
                                 <div className="education__info">
-                                    <p className="education__institution">{edu.institution}</p>
-                                    <span className="education__location-tag">
-                                        📍 {edu.location}
-                                    </span>
+                                    <div className="education__institution">{edu.institution}</div>
+                                    <div className="education__location-tag">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                            <circle cx="12" cy="10" r="3" />
+                                        </svg>
+                                        {edu.location}
+                                    </div>
                                 </div>
-                                {edu.stream && <p className="education__stream">{edu.stream}</p>}
+
+                                {edu.stream && (
+                                    <span className="education__stream">{edu.stream}</span>
+                                )}
+
                                 <p className="education__desc">{edu.description}</p>
 
                                 <div className="education__highlights">
                                     {edu.highlights.map((h, i) => (
-                                        <span key={i} className="education__highlight-tag">
+                                        <span
+                                            key={i}
+                                            className="education__highlight-tag"
+                                        >
                                             {h}
                                         </span>
                                     ))}
                                 </div>
                             </div>
 
-                            {/* Decorative line */}
                             <div
                                 className="education__accent-line"
-                                style={{ background: `linear-gradient(90deg, ${edu.color}, transparent)` }}
+                                style={{ background: edu.color }}
                             />
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

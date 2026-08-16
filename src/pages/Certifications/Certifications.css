@@ -1,6 +1,6 @@
 .certifications {
     position: relative;
-    background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.02) 50%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.015) 50%, transparent);
     margin-top: -50px;
     padding-top: 40px !important;
 }
@@ -27,18 +27,15 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     height: 100%;
-    will-change: transform;
 }
 
 .certification__card:hover {
     transform: translateY(-8px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(15, 23, 42, 0.1);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
 .certification__icon-wrapper {
@@ -65,14 +62,14 @@
 
 .certification__badge {
     padding: 4px 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(248, 250, 252, 0.5);
+    border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: 100px;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .certification__content {
@@ -101,13 +98,13 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .certification__date {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .certification__link {

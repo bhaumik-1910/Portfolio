@@ -1,10 +1,11 @@
-import { useEffect, useRef, memo } from 'react';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import './Experience.css';
 
 const experiencesData = [
     {
         id: 1,
-        role: 'Full Stack Developer (React & MERN Stack)',
+        role: 'MERN Stack Developer Intern',
         company: 'Vasant Software Solutions',
         period: 'June 2023 - December 2024',
         type: 'Part-time',
@@ -17,7 +18,7 @@ const experiencesData = [
             'Optimized application performance reducing load time by 50%',
             'Deployed applications on Vercel and Render with CI/CD automation',
         ],
-        color: '#3b82f6',
+        color: '#2563eb',
         icon: '💼',
     },
     {
@@ -34,37 +35,23 @@ const experiencesData = [
             'Integrated REST APIs, JWT authentication, and MongoDB database optimization for scalable performance',
             'Ensured 99.9% uptime through deployment on Vercel & Render with CI/CD configuration',
         ],
-        color: '#10b981',
+        color: '#059669',
         icon: '🌐',
     }
-
 ];
 
 const Experience = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                            el.classList.add('visible');
-                        });
-                    }
-                });
-            },
-            { threshold: 0.05 }
-        );
-
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
-    }, []);
-
     return (
-        <section className="section experience" id="experience" ref={sectionRef}>
+        <section className="section experience" id="experience">
             <div className="section-inner">
-                <div className="experience__header animate-on-scroll">
+                {/* Header */}
+                <motion.div
+                    className="experience__header"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <span className="section-label">My Journey</span>
                     <h2 className="section-title">
                         Work <span className="gradient-text">Experience</span>
@@ -72,24 +59,31 @@ const Experience = () => {
                     <p className="section-subtitle">
                         A timeline of my professional growth, from internships to leading full-stack projects.
                     </p>
-                </div>
+                </motion.div>
 
+                {/* Timeline */}
                 <div className="timeline">
                     <div className="timeline__line" />
 
-                    {experiencesData.map((exp, idx) => (
-                        <div
+                    {experiencesData.map((exp) => (
+                        <motion.div
                             key={exp.id}
-                            className={`timeline__item animate-on-scroll animate-delay-${idx + 1}`}
+                            className="timeline__item"
                             id={`experience-${exp.id}`}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }}
                         >
+                            {/* Timeline Dot - Appears simultaneously with the item */}
                             <div
                                 className="timeline__dot"
-                                style={{ background: exp.color, boxShadow: `0 0 20px ${exp.color}60` }}
+                                style={{ background: exp.color, boxShadow: `0 0 20px ${exp.color}40` }}
                             >
                                 <span>{exp.icon}</span>
                             </div>
 
+                            {/* Timeline Card */}
                             <div className="timeline__card glass-card">
                                 <div className="timeline__card-header">
                                     <div>
@@ -128,11 +122,16 @@ const Experience = () => {
                                     </div>
                                 </div>
 
-                                <p className="timeline__desc">{exp.description}</p>
+                                <p className="timeline__desc">
+                                    {exp.description}
+                                </p>
 
                                 <ul className="timeline__achievements">
                                     {exp.achievements.map((ach, i) => (
-                                        <li key={i} className="timeline__achievement">
+                                        <li
+                                            key={i}
+                                            className="timeline__achievement"
+                                        >
                                             <span
                                                 className="timeline__achievement-dot"
                                                 style={{ background: exp.color }}
@@ -142,7 +141,7 @@ const Experience = () => {
                                     ))}
                                 </ul>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

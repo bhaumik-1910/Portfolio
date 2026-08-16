@@ -1,5 +1,5 @@
 .about {
-    background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.03) 50%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.02) 50%, transparent);
     margin-top: clamp(-30px, -5vw, -50px);
     padding: clamp(30px, 5vw, 40px) clamp(1rem, 3vw, 2rem) !important;
 }
@@ -38,7 +38,7 @@
 .about__ring--1 {
     width: clamp(280px, 40vw, 340px);
     height: clamp(280px, 40vw, 340px);
-    border-color: rgba(59, 130, 246, 0.15);
+    border-color: rgba(37, 99, 235, 0.12);
     animation: spin-ring 20s linear infinite;
 }
 
@@ -58,7 +58,7 @@
 .about__ring--2 {
     width: clamp(230px, 33vw, 280px);
     height: clamp(230px, 33vw, 280px);
-    border-color: rgba(139, 92, 246, 0.12);
+    border-color: rgba(124, 58, 237, 0.1);
     animation: counter-spin 15s linear infinite;
 }
 
@@ -78,7 +78,7 @@
 .about__ring--3 {
     width: clamp(180px, 26vw, 220px);
     height: clamp(180px, 26vw, 220px);
-    border-color: rgba(6, 182, 212, 0.1);
+    border-color: rgba(8, 145, 178, 0.08);
     animation: spin-ring 25s linear infinite reverse;
 }
 
@@ -91,8 +91,8 @@
     width: clamp(140px, 20vw, 180px);
     height: clamp(140px, 20vw, 180px);
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-    border: clamp(1px, 0.3vw, 2px) solid rgba(59, 130, 246, 0.3);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+    border: clamp(1px, 0.3vw, 2px) solid rgba(37, 99, 235, 0.2);
     overflow: hidden;
     animation: pulse-glow 3s ease-in-out infinite;
 }
@@ -104,7 +104,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, #0a1628, #0d0a2e);
+    background: linear-gradient(135deg, #f1f5f9, #f0f4ff);
 }
 
 .about__avatar-svg {
@@ -133,15 +133,15 @@
     align-items: center;
     gap: clamp(6px, 1vw, 8px);
     padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
-    background: rgba(10, 18, 40, 0.9);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(37, 99, 235, 0.15);
     border-radius: var(--radius-md);
     font-size: clamp(11px, 1.2vw, 13px);
     font-weight: 600;
     color: var(--text-primary);
     backdrop-filter: blur(10px);
     white-space: nowrap;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .about__badge--1 {

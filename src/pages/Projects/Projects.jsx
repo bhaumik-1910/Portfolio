@@ -1,13 +1,8 @@
-import { useRef, memo } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { memo } from 'react';
+import { motion } from 'framer-motion';
 import './Projects.css';
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
-//Projects data array with enhanced styling properties
+// Projects data array with enhanced styling properties
 const projectsData = [
     {
         id: 1,
@@ -98,157 +93,20 @@ const projectsData = [
         githubUrl: 'https://github.com/bhaumik-1910/Realtime-collaborative-document-editing-app-master',
         emoji: '📄',
     },
-    // {
-    //     id: 5,
-    //     title: 'TextUtilize',
-    //     description: 'A powerful and user-friendly text utility web application that allows users to transform, analyze, and manipulate text efficiently. Features include case conversion, word and character counting, text formatting, and instant preview with a clean responsive UI.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #052e16, #064e3b)',
-    //     accentColor: '#3b82f6',
-    //     tags: ['HTML', 'JavaScript', 'React.js', 'CSS', 'Bootstrap',],
-    //     liveUrl: 'https://textutilze-alpha.vercel.app/',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Textutilze',
-    //     emoji: '📝',
-    // },
-    // {
-    //     id: 6,
-    //     title: 'Cyber-Guard',
-    //     description: 'A deep-scan security auditing and network protection suite designed to identify vulnerabilities and secure digital infrastructures using advanced scanning algorithms.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #052e16, #064e3b)',
-    //     accentColor: '#22c55e',
-    //     tags: ['Next.js', 'TypeScript', 'Security', 'Tailwind'],
-    //     liveUrl: 'https://cyber-guard-chi.vercel.app/',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Cyber-Guard',
-    //     emoji: '🛡️',
-    // },
-    // {
-    //     id: 6,
-    //     title: 'QuickCart-Ecommerce',
-    //     description: 'Scalable e-commerce solution with real-time inventory management, multi-vendor support, secure payment gateway, and an advanced analytics dashboard for sellers.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #310e5d, #4c1d95)',
-    //     accentColor: '#a78bfa',
-    //     tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    //     liveUrl: 'https://github.com/bhaumik-1910/QuickCart-Ecommerce',
-    //     githubUrl: 'https://github.com/bhaumik-1910/QuickCart-Ecommerce',
-    //     emoji: '🛒',
-    // },
-    // {
-    //     id: 8,
-    //     title: 'Crypto_Flow-UI',
-    //     description: 'A sleek, modern cryptocurrency tracking dashboard providing real-time price feeds, portfolio heatmaps, and transaction history with high-performance charts.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #4c1d95, #6d28d9)',
-    //     accentColor: '#c084fc',
-    //     tags: ['React', 'Chart.js', 'Tailwind CSS'],
-    //     liveUrl: 'https://github.com/bhaumik-1910/Crypto_Flow-UI',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Crypto_Flow-UI',
-    //     emoji: '💎',
-    // },
-    // {
-    //     id: 9,
-    //     title: 'Car_Rental_UI',
-    //     description: 'A specialized car rental management system featuring vehicle categorization, availability calendars, automated billing, and user-friendly booking workflows.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #7c2d12, #9a3412)',
-    //     accentColor: '#fb923c',
-    //     tags: ['React', 'React Router', 'Lucide Icons', 'Material UI'],
-    //     liveUrl: 'https://github.com/bhaumik-1910/Car_Rental_UI',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Car_Rental_UI',
-    //     emoji: '🚗',
-    // },
-    // {
-    //     id: 10,
-    //     title: 'Fast_Food-UI',
-    //     description: 'A vibrant food ordering application UI focusing on user experience, featuring dynamic menu filtering, interactive cart, and seamless order tracking.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #831843, #9d174d)',
-    //     accentColor: '#f472b6',
-    //     tags: ['HTML5', 'JavaScript (ES6+)', 'CSS3 / Tailwind CSS', 'Animation'],
-    //     liveUrl: 'https://github.com/bhaumik-1910/Fast_Food-UI',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Fast_Food-UI',
-    //     emoji: '🍔',
-    // },
-    // {
-    //     id: 11,
-    //     title: 'Nike-Shoes-Template',
-    //     description: 'High-performance landing page design focusing on storytelling and interactive product displays with smooth scroll animations and modern typography.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #1e293b, #334155)',
-    //     accentColor: '#ffffff',
-    //     tags: ['HTML5', 'CSS3', 'AOS', 'UI Design'],
-    //     liveUrl: 'https://nike-shoes-template.vercel.app/',
-    //     githubUrl: 'https://github.com/bhaumik-1910/Nike-Shoes-Template',
-    //     emoji: '👟',
-    // },
-    // {
-    //     id: 12,
-    //     title: 'IT Academy Landing Page',
-    //     description: 'A professional, responsive landing page for an IT academy. Features course listings, an "About" section, and a clean, modern UI optimized for both mobile and desktop users.',
-    //     image: null,
-    //     gradient: 'linear-gradient(135deg, #1e3a8a, #1d4ed8)',
-    //     accentColor: '#60a5fa',
-    //     tags: ['HTML5', 'CSS3', 'Responsive Design', 'UI/UX'],
-    //     liveUrl: 'https://academy-lenging.vercel.app/',
-    //     githubUrl: 'https://github.com/bhaumik-1910/IT-Academy-Lenging-Page',
-    //     emoji: '🎓',
-    // },
 ];
 
 const Projects = () => {
-    const sectionRef = useRef(null);
-    const gridRef = useRef(null);
-
-    useGSAP(() => {
-        // Header animation
-        gsap.from('.projects__header > *', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.projects__header',
-                start: 'top 85%',
-            }
-        });
-
-        // Grid cards animation
-        gsap.from('.project-card', {
-            opacity: 0,
-            y: 50,
-            scale: 0.95,
-            duration: 0.8,
-            stagger: {
-                amount: 0.8,
-                grid: [Math.ceil(projectsData.length / 3), 3],
-                from: 'start'
-            },
-            ease: 'back.out(1.4)',
-            scrollTrigger: {
-                trigger: gridRef.current,
-                start: 'top 80%',
-            }
-        });
-
-        // Footer button animation
-        gsap.from('.projects__footer', {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: '.projects__footer',
-                start: 'top 90%',
-            }
-        });
-    }, { scope: sectionRef });
-
     return (
-        <section className="section projects" id="projects" ref={sectionRef}>
+        <section className="section projects" id="projects">
             <div className="section-inner">
-                <div className="projects__header">
+                {/* Header */}
+                <motion.div
+                    className="projects__header"
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] }}
+                >
                     <span className="section-label">Selected Works</span>
                     <h2 className="section-title">
                         Featured <span className="gradient-text">Projects</span>
@@ -257,57 +115,71 @@ const Projects = () => {
                         A showcase of my production-level applications and experimental projects.
                         Note: Some enterprise projects are marked as private due to licensing.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="projects__grid" ref={gridRef}>
-                    {projectsData.map((project) => (
-                        <div
+                {/* Grid */}
+                <div className="projects__grid">
+                    {projectsData.map((project, idx) => (
+                        <motion.div
                             key={project.id}
                             className="project-card glass-card"
-                            id={`project-card-${project.id}`}
+                            initial={{ opacity: 0, y: 35 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{
+                                duration: 0.55,
+                                delay: (idx % 3) * 0.1,
+                                ease: [0.25, 0.1, 0.25, 1.0],
+                            }}
+                            whileHover={{ y: -6, transition: { duration: 0.2 } }}
                         >
+                            {/* Preview Area with Gradient & Emoji */}
                             <div
                                 className="project-card__preview"
                                 style={{ background: project.gradient }}
                             >
                                 <div className="project-card__preview-grid" />
-                                <div
-                                    className="project-card__preview-glow"
-                                    style={{ background: `radial-gradient(circle, ${project.accentColor}30 0%, transparent 70%)` }}
-                                />
-                                <div className="project-card__preview-emoji">{project.emoji}</div>
+                                <motion.span
+                                    className="project-card__preview-emoji"
+                                    whileHover={{ scale: 1.15, rotate: -4 }}
+                                    transition={{ type: 'spring', stiffness: 300 }}
+                                >
+                                    {project.emoji}
+                                </motion.span>
 
+                                {/* Window Chrome Dots */}
                                 <div className="project-card__chrome">
-                                    <span style={{ background: '#ff5f57' }} />
+                                    <span style={{ background: '#ff5f56' }} />
                                     <span style={{ background: '#ffbd2e' }} />
-                                    <span style={{ background: '#28c840' }} />
+                                    <span style={{ background: '#27c93f' }} />
                                 </div>
 
+                                {/* Badges */}
                                 <div className="project-card__badges">
                                     {project.isPrivate && (
-                                        <div className="project-card__private-badge">
+                                        <span className="project-card__private-badge">
                                             Private Repo
-                                        </div>
+                                        </span>
                                     )}
-
                                     {project.isVirtualRound && (
-                                        <div className="project-card__virtual-badge">
+                                        <span className="project-card__virtual-badge">
                                             Virtual Round
-                                        </div>
+                                        </span>
                                     )}
-
                                     {project.isQualified && (
-                                        <div className="project-card__qualified-badge">
+                                        <span className="project-card__qualified-badge">
                                             Qualified
-                                        </div>
+                                        </span>
                                     )}
                                 </div>
                             </div>
 
+                            {/* Content */}
                             <div className="project-card__content">
                                 <h3 className="project-card__title">{project.title}</h3>
                                 <p className="project-card__desc">{project.description}</p>
 
+                                {/* Tags */}
                                 <div className="project-card__tags">
                                     {project.tags.map((tag) => (
                                         <span
@@ -315,7 +187,6 @@ const Projects = () => {
                                             className="project-card__tag"
                                             style={{
                                                 color: project.accentColor,
-                                                background: `${project.accentColor}15`,
                                                 borderColor: `${project.accentColor}30`,
                                             }}
                                         >
@@ -324,59 +195,82 @@ const Projects = () => {
                                     ))}
                                 </div>
 
+                                {/* Action Links */}
                                 <div className="project-card__links">
-                                    {project.liveUrl && project.liveUrl !== '#' ? (
-                                        <>
-                                            <a
-                                                href={project.liveUrl}
-                                                className="project-card__link project-card__link--primary"
-                                                style={{ background: `${project.accentColor}20`, borderColor: `${project.accentColor}40`, color: project.accentColor }}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                            >
-                                                View Project
-                                            </a>
-                                            {!project.isPrivate && project.githubUrl && project.githubUrl !== '#' && (
-                                                <a
-                                                    href={project.githubUrl}
-                                                    className="project-card__link project-card__link--secondary"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    GitHub
-                                                </a>
-                                            )}
-                                        </>
-                                    ) : project.isPrivate ? (
-                                        <button className="project-card__link project-card__link--disabled" disabled>
-                                            Enterprise Project
-                                        </button>
-                                    ) : (
-                                        <a
-                                            href={project.githubUrl}
-                                            className="project-card__link project-card__link--secondary"
+                                    {project.liveUrl !== '#' ? (
+                                        <motion.a
+                                            href={project.liveUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            className="project-card__link project-card__link--primary"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
                                         >
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                <polyline points="15 3 21 3 21 9" />
+                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                            </svg>
+                                            View Project
+                                        </motion.a>
+                                    ) : (
+                                        <motion.button
+                                            className="project-card__link project-card__link--primary"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                <polyline points="15 3 21 3 21 9" />
+                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                            </svg>
+                                            View Project
+                                        </motion.button>
+                                    )}
+
+                                    {project.githubUrl !== '#' && (
+                                        <motion.a
+                                            href={project.githubUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="project-card__link project-card__link--secondary"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                            </svg>
                                             GitHub
-                                        </a>
+                                        </motion.a>
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
-                <div className="projects__footer">
-                    <a
+                {/* Footer Link */}
+                <motion.div
+                    className="projects__footer"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <motion.a
                         href="https://github.com/bhaumik-1910"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-outline"
+                        whileHover={{ scale: 1.03, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
                     >
-                        See All Public Repositories
-                    </a>
-                </div>
+                        View More on GitHub
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </motion.a>
+                </motion.div>
             </div>
         </section>
     );

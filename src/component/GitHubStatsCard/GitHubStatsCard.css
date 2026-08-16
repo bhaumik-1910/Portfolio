@@ -1,6 +1,6 @@
 /* ============================================
-   GitHub Stats Card - Matching Reference Design
-   Dark themed card with timeline, stats & metadata
+   GitHub Stats Card - White Theme Edition
+   Clean light card with timeline, stats & metadata
    Font: Calibri (matching full project)
    ============================================ */
 
@@ -9,12 +9,13 @@
     width: 100%;
     max-width: 860px;
     margin: 0 auto;
-    background: linear-gradient(165deg, #0d1525 0%, #0a1120 40%, #0c1428 100%);
-    border: 1px solid rgba(96, 165, 250, 0.12);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(37, 99, 235, 0.12);
     border-radius: 14px;
     padding: clamp(18px, 3vw, 28px) clamp(18px, 3.5vw, 36px);
     overflow: hidden;
     font-family: 'Calibri', 'Inter', 'Space Grotesk', sans-serif;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
 }
 
 /* Top shine accent line */
@@ -26,9 +27,9 @@
     height: 1px;
     background: linear-gradient(90deg,
             transparent 0%,
-            rgba(96, 165, 250, 0.3) 30%,
-            rgba(139, 92, 246, 0.4) 50%,
-            rgba(96, 165, 250, 0.3) 70%,
+            rgba(37, 99, 235, 0.3) 30%,
+            rgba(124, 58, 237, 0.3) 50%,
+            rgba(37, 99, 235, 0.3) 70%,
             transparent 100%);
 }
 
@@ -49,7 +50,7 @@
 .gh-stats-card__username {
     font-size: clamp(1.05rem, 2.2vw, 1.3rem);
     font-weight: 700;
-    color: #f0f4ff;
+    color: #0f172a;
     letter-spacing: -0.01em;
     line-height: 1.2;
     margin: 0;
@@ -65,7 +66,7 @@
 .gh-stats-card__badge {
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: clamp(0.58rem, 0.9vw, 0.68rem);
-    color: #475569;
+    color: #94a3b8;
     letter-spacing: 0.02em;
     white-space: nowrap;
     flex-shrink: 0;
@@ -77,9 +78,9 @@
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg,
-            rgba(255, 255, 255, 0.06) 0%,
-            rgba(255, 255, 255, 0.1) 50%,
-            rgba(255, 255, 255, 0.06) 100%);
+            rgba(15, 23, 42, 0.04) 0%,
+            rgba(15, 23, 42, 0.08) 50%,
+            rgba(15, 23, 42, 0.04) 100%);
     margin-bottom: 20px;
 }
 
@@ -87,9 +88,9 @@
 .gh-stats-card__timeline {
     position: relative;
     width: 100%;
-    height: 58px;
-    margin-bottom: 22px;
-    padding: 0 10px;
+    height: 52px;
+    margin-bottom: 14px;
+    padding: 0 4px;
 }
 
 .gh-stats-card__timeline-track {
@@ -100,11 +101,11 @@
 
 .gh-stats-card__timeline-line {
     position: absolute;
-    top: 32px;
-    left: 4%;
-    right: 4%;
+    top: 25px;
+    left: 3%;
+    right: 3%;
     height: 2px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.12);
     border-radius: 1px;
 }
 
@@ -115,90 +116,60 @@
     align-items: center;
     transform: translateX(-50%);
     gap: 4px;
+    top: 0;
 }
 
-/* Timeline marker shapes */
+/* Timeline marker shapes matching screenshot */
 .gh-stats-card__timeline-marker {
-    height: 14px;
+    height: 18px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
 }
 
 .gh-stats-card__timeline-dash {
-    width: 14px;
-    height: 3px;
-    background: #3b82f6;
-    border-radius: 2px;
-    opacity: 0.7;
-}
-
-.gh-stats-card__timeline-dots {
-    display: flex;
-    gap: 3px;
-    align-items: flex-end;
-}
-
-.gh-stats-card__timeline-dots span {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #60a5fa;
+    width: 15px;
+    height: 4.5px;
+    background: #2563eb;
+    border-radius: 3px;
 }
 
 .gh-stats-card__timeline-bar {
-    width: 12px;
-    height: 14px;
-    background: linear-gradient(to top, #3b82f6, #60a5fa);
-    border-radius: 3px 3px 1px 1px;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+    width: 14px;
+    height: 18px;
+    background: #2563eb;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
 }
 
 .gh-stats-card__timeline-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #60a5fa;
-    border: 2px solid #0d1525;
-    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.3);
+    background: #2563eb;
     position: relative;
     z-index: 2;
 }
 
 .gh-stats-card__timeline-dot--now {
     background: #10b981;
-    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.4),
-        0 0 8px rgba(16, 185, 129, 0.5);
-    animation: pulse-now 2s infinite ease-in-out;
-}
-
-@keyframes pulse-now {
-
-    0%,
-    100% {
-        box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.4),
-            0 0 8px rgba(16, 185, 129, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2),
-            0 0 16px rgba(16, 185, 129, 0.5);
-    }
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
 .gh-stats-card__timeline-label {
-    font-size: 10.5px;
-    font-weight: 600;
-    color: #60a5fa;
-    letter-spacing: 0.02em;
+    font-size: 11px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.01em;
     margin-top: 1px;
+    font-family: inherit;
 }
 
 .gh-stats-card__timeline-label--now {
     color: #10b981;
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
 }
 
 /* ─── STATS ROW ─── */
@@ -207,7 +178,7 @@
     align-items: center;
     justify-content: center;
     gap: 0;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     padding: 0 4px;
 }
 
@@ -217,33 +188,33 @@
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    padding: 6px 6px;
+    padding: 4px 6px;
 }
 
 .gh-stats-card__stat-divider {
     width: 1px;
-    height: 85px;
+    height: 64px;
     background: linear-gradient(180deg,
             transparent 0%,
-            rgba(255, 255, 255, 0.08) 30%,
-            rgba(255, 255, 255, 0.08) 70%,
+            rgba(15, 23, 42, 0.08) 30%,
+            rgba(15, 23, 42, 0.08) 70%,
             transparent 100%);
     flex-shrink: 0;
 }
 
 .gh-stats-card__stat-number {
-    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.03em;
 }
 
 .gh-stats-card__stat-number--contributions {
-    color: #e2e8f0;
+    color: #0f172a;
 }
 
 .gh-stats-card__stat-number--longest {
-    color: #a78bfa;
+    color: #7c3aed;
     font-style: italic;
 }
 
@@ -258,13 +229,13 @@
 
 .gh-stats-card__stat-sub {
     font-size: clamp(0.52rem, 0.85vw, 0.62rem);
-    color: #475569;
+    color: #94a3b8;
     font-weight: 400;
 }
 
 .gh-stats-card__stat-range {
     font-size: clamp(0.52rem, 0.85vw, 0.62rem);
-    color: #818cf8;
+    color: #6366f1;
     font-weight: 500;
     font-style: italic;
 }
@@ -276,36 +247,41 @@
 
 .gh-stats-card__streak-ring {
     position: relative;
-    width: clamp(56px, 8vw, 68px);
-    height: clamp(56px, 8vw, 68px);
+    width: 58px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2px;
+    margin: 0 auto 2px auto;
 }
 
 .gh-stats-card__streak-svg {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
 }
 
 .gh-stats-card__streak-count {
-    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.45rem);
     font-weight: 800;
-    color: #f0f4ff;
+    color: #0f172a;
     z-index: 2;
     line-height: 1;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .gh-stats-card__streak-fire {
     position: absolute;
-    top: -2px;
+    top: -9px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1;
     z-index: 3;
-    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.6));
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
     animation: fire-float 2s ease-in-out infinite;
 }
 
@@ -317,7 +293,7 @@
     }
 
     50% {
-        transform: translateX(-50%) translateY(-3px);
+        transform: translateX(-50%) translateY(-2px);
     }
 }
 
@@ -327,7 +303,7 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 12px 0 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
     gap: 10px;
 }
 
@@ -341,24 +317,24 @@
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: clamp(0.5rem, 0.8vw, 0.6rem);
     font-weight: 600;
-    color: #475569;
+    color: #94a3b8;
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 .gh-stats-card__meta-value {
     font-size: clamp(0.7rem, 1.1vw, 0.8rem);
-    color: #94a3b8;
+    color: #475569;
     font-weight: 500;
 }
 
 .gh-stats-card__meta-bold {
     font-weight: 700;
-    color: #f0f4ff;
+    color: #0f172a;
 }
 
 .gh-stats-card__meta-highlight {
-    color: #10b981;
+    color: #059669;
     font-weight: 700;
 }
 
@@ -371,21 +347,22 @@
     margin-top: 8px;
     font-family: 'Fira Code', 'Consolas', monospace;
     font-size: clamp(0.5rem, 0.75vw, 0.6rem);
-    color: #334155;
+    color: #94a3b8;
     letter-spacing: 0.02em;
 }
 
 /* ─── HOVER EFFECT ─── */
 .gh-stats-card:hover {
-    border-color: rgba(96, 165, 250, 0.2);
+    border-color: rgba(37, 99, 235, 0.25);
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08);
 }
 
 .gh-stats-card:hover .gh-stats-card__shine {
     background: linear-gradient(90deg,
             transparent 0%,
-            rgba(96, 165, 250, 0.4) 30%,
-            rgba(139, 92, 246, 0.5) 50%,
-            rgba(96, 165, 250, 0.4) 70%,
+            rgba(37, 99, 235, 0.4) 30%,
+            rgba(124, 58, 237, 0.4) 50%,
+            rgba(37, 99, 235, 0.4) 70%,
             transparent 100%);
 }
 

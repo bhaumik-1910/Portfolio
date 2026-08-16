@@ -1,93 +1,90 @@
-/* ============================================
-   APP.CSS - Component Overrides & App Layout
-   ============================================ */
-
-#root {
+/* App Layout */
+.app {
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 
-/* App background with animated gradient */
+/* Background Gradients */
 .app-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
-  background: var(--gradient-hero);
-  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.07), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(124, 58, 237, 0.05), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(59, 130, 246, 0.05), transparent),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(14, 165, 233, 0.04), transparent);
 }
 
-.app-bg::before {
-  content: '';
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-  top: -200px;
-  right: -200px;
-  animation: float 8s ease-in-out infinite;
+/* Subtle Noise Texture */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.app-bg::after {
-  content: '';
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-  bottom: -100px;
-  left: -100px;
-  animation: float 10s ease-in-out infinite reverse;
-}
-
-/* Main content wrapper */
-.main-content {
+/* Main Content */
+main {
   position: relative;
   z-index: 1;
 }
 
-/* Custom Cursor */
+/* Luxury Custom Cursor - Compact Medium Size */
 .custom-cursor {
   position: fixed;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: 1px solid var(--accent-blue);
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+  background: rgba(37, 99, 235, 0.04);
+  border: 1.5px solid rgba(37, 99, 235, 0.45);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.1);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-  mix-blend-mode: exclusion;
+  z-index: 99999;
+  will-change: transform;
+  transition: background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .custom-cursor-dot {
   position: fixed;
-  top: -3px;
-  left: -3px;
-  width: 6px;
-  height: 6px;
-  background: var(--accent-blue);
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  margin-top: -2.5px;
+  margin-left: -2.5px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  box-shadow: 0 0 6px rgba(37, 99, 235, 0.6);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease-out;
+  z-index: 100000;
+  will-change: transform;
 }
 
-.custom-cursor--pointer {
-  width: 60px;
-  height: 60px;
-  top: -30px;
-  left: -30px;
-  background: rgba(59, 130, 246, 0.1);
-  border-color: var(--accent-blue-light);
+/* Hover State on Links, Buttons & Cards */
+.custom-cursor--hover {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.7);
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.22);
+}
+
+.custom-cursor-dot--hover {
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
 }
 
 @media (max-width: 1024px) {
-
   .custom-cursor,
   .custom-cursor-dot {
-    display: none;
+    display: none !important;
   }
 }

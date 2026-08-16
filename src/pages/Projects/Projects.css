@@ -1,5 +1,5 @@
 .projects {
-    background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.03) 50%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.02) 50%, transparent);
     margin-top: clamp(-30px, -5vw, -50px);
     padding: clamp(30px, 5vw, 60px) clamp(1rem, 3vw, 2rem);
 }
@@ -50,18 +50,14 @@
     flex-direction: column;
     overflow: hidden;
     padding: 0;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
     height: 100%;
     border-radius: 12px;
-    border: 1px solid rgba(59, 130, 246, 0.1);
-    will-change: transform;
+    border: 1px solid rgba(37, 99, 235, 0.08);
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
     border-color: var(--accent-blue);
 }
 
@@ -79,8 +75,8 @@
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
     background-size: 20px 20px;
 }
 
@@ -130,9 +126,9 @@
 .project-card__virtual-badge,
 .project-card__qualified-badge {
     padding: clamp(3px, 0.5vw, 4px) clamp(8px, 1.5vw, 10px);
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-full);
     font-size: clamp(9px, 1.2vw, 10px);
     font-weight: 600;
@@ -225,7 +221,7 @@
     font-weight: 600;
     border: 1px solid;
     font-family: var(--font-mono);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(248, 250, 252, 0.5);
 }
 
 /* Links */
@@ -259,20 +255,20 @@
 }
 
 .project-card__link--primary {
-    background: rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(37, 99, 235, 0.08);
+    border-color: rgba(37, 99, 235, 0.2);
     color: var(--accent-blue-light);
 }
 
 .project-card__link--secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(248, 250, 252, 0.5);
+    border-color: rgba(15, 23, 42, 0.06);
     color: var(--text-secondary);
 }
 
 .project-card__link--disabled {
-    background: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(248, 250, 252, 0.3);
+    border-color: rgba(15, 23, 42, 0.04);
     color: var(--text-muted);
     cursor: not-allowed;
     opacity: 0.7;

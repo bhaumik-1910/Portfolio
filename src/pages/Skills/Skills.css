@@ -1,5 +1,5 @@
 .skills {
-    background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03) 50%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(124, 58, 237, 0.02) 50%, transparent);
     margin-top: clamp(-60px, -8vw, -100px);
     padding: clamp(30px, 5vw, 60px) 0;
 }
@@ -77,20 +77,20 @@
     display: flex;
     min-height: 480px;
     height: auto;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     overflow: visible;
-    background: rgba(10, 18, 40, 0.4);
+    background: rgba(255, 255, 255, 0.8);
     width: 100%;
 }
 
 .skills__sidebar {
     width: 180px;
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(15, 23, 42, 0.06);
     display: flex;
     flex-direction: column;
     padding: 24px 0;
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(248, 250, 252, 0.5);
     align-self: stretch;
 }
 
@@ -98,8 +98,8 @@
 .skills__layout:hover {
     transform: none !important;
     box-shadow: none !important;
-    background: rgba(10, 18, 40, 0.4) !important;
-    border-color: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-color: rgba(15, 23, 42, 0.06) !important;
 }
 
 .skills__tab {
@@ -119,12 +119,12 @@
 
 .skills__tab:hover {
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(15, 23, 42, 0.03);
 }
 
 .skills__tab.active {
     color: var(--accent-blue-light);
-    background: rgba(59, 130, 246, 0.05);
+    background: rgba(37, 99, 235, 0.04);
 }
 
 .skills__tab-indicator {
@@ -139,7 +139,7 @@
 .circle-outline {
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(15, 23, 42, 0.12);
     border-radius: 50%;
 }
 
@@ -210,7 +210,7 @@
 /* Grid Lines */
 .grid-line {
     position: absolute;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(15, 23, 42, 0.04);
     pointer-events: none;
 }
 
@@ -266,7 +266,7 @@
         scrollbar-width: none;
         /* Firefox */
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(15, 23, 42, 0.06);
         padding: 12px;
         gap: 8px;
     }
