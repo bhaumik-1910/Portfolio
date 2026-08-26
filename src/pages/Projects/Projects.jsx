@@ -81,18 +81,18 @@ const projectsData = [
         githubUrl: 'https://github.com/bhaumik-1910/Neurovia_AI',
         emoji: '🇮🇳',
     },
-    {
-        id: 7,
-        title: 'Real-time Editor',
-        description: 'A collaborative document editing platform that allows multiple users to edit documents simultaneously with real-time cursor tracking and version history.',
-        image: null,
-        gradient: 'linear-gradient(135deg, #064e3b, #065f46)',
-        accentColor: '#10b981',
-        tags: ['Socket.io', 'React', 'Node.js', 'Redis'],
-        liveUrl: 'https://github.com/bhaumik-1910/Realtime-collaborative-document-editing-app-master',
-        githubUrl: 'https://github.com/bhaumik-1910/Realtime-collaborative-document-editing-app-master',
-        emoji: '📄',
-    },
+    // {
+    //     id: 7,
+    //     title: 'Real-time Editor',
+    //     description: 'A collaborative document editing platform that allows multiple users to edit documents simultaneously with real-time cursor tracking and version history.',
+    //     image: null,
+    //     gradient: 'linear-gradient(135deg, #064e3b, #065f46)',
+    //     accentColor: '#10b981',
+    //     tags: ['Socket.io', 'React', 'Node.js', 'Redis'],
+    //     liveUrl: 'https://github.com/bhaumik-1910/Realtime-collaborative-document-editing-app-master',
+    //     githubUrl: 'https://github.com/bhaumik-1910/Realtime-collaborative-document-editing-app-master',
+    //     emoji: '📄',
+    // },
 ];
 
 const Projects = () => {
